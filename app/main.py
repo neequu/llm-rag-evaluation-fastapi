@@ -1,15 +1,18 @@
-from fastapi import Depends, FastAPI
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import FastAPI
 
-from app.db import get_db
-from app.models.user import User
+from app.api.v1.api import api_router
+from app.core.config import settings
 
-app = FastAPI(title="Modern FastAPI Stack")
+app = FastAPI(
+    title="Modern FastAPI Stack",
+    version="1.0.0",
+    docs_url="/docs" if settings.APP_DEBUG else None,
+    redoc_url="/redoc" if settings.APP_DEBUG else None,
+)
+
+app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/health")
-async def health_check(db: AsyncSession = Depends(get_db)):
-    # Simple async query to verify DB connection
-    result = await db.execute(select(User).limit(1))
-    return {"status": "online", "db_connected": True}
+async def health_check():
+    return {"status": "online", "version": "1.0.0"}
