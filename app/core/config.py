@@ -19,6 +19,14 @@ class Settings(BaseSettings):
 
     REDIS_PORT: int = 6379
 
+    MINIO_API_PORT: int = 9000
+    MINIO_CONSOLE_PORT: int = 9001
+    MINIO_ROOT_USER: str = "minioadmin"
+    MINIO_ROOT_PASSWORD: str = "minioadmin"
+    MINIO_HOST: str = "localhost"
+    MINIO_BUCKET_NAME: str = "rag-bucket"
+    MINIO_SECURE: bool = False
+
     APP_PORT: int = 8000
     APP_ENV: str = "development"
     APP_DEBUG: bool = True
@@ -45,6 +53,18 @@ class Settings(BaseSettings):
     def REDIS_URL(self) -> str:
         """Build Redis URL from port"""
         return f"redis://redis:{self.REDIS_PORT}/0"
+
+    @property
+    def MINIO_URL(self) -> str:
+        """Build MinIO API URL"""
+        protocol = "https" if self.MINIO_SECURE else "http"
+        return f"{protocol}://{self.MINIO_HOST}:{self.MINIO_API_PORT}"
+
+    @property
+    def MINIO_CONSOLE_URL(self) -> str:
+        """Build MinIO Console URL"""
+        protocol = "https" if self.MINIO_SECURE else "http"
+        return f"{protocol}://{self.MINIO_HOST}:{self.MINIO_CONSOLE_PORT}"
 
 
 settings = Settings()  # type: ignore

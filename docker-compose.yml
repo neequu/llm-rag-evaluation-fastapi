@@ -16,17 +16,17 @@ services:
       - REDIS_URL=${REDIS_URL}
 
   db:
-    image: postgres:16-alpine
+    image: pgvector/pgvector:pg16
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pass}
-      POSTGRES_DB: ${POSTGRES_DB:-fastapi_db}
+      POSTGRES_DB: ${POSTGRES_DB:-rag_db}
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-user} -d ${POSTGRES_DB:-fastapi_db}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-user} -d ${POSTGRES_DB:-rag_db}"]
       interval: ${DB_HEALTHCHECK_INTERVAL:-5s}
       timeout: ${DB_HEALTHCHECK_TIMEOUT:-5s}
       retries: ${DB_HEALTHCHECK_RETRIES:-5}
@@ -45,6 +45,25 @@ services:
       retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
     restart: unless-stopped
 
+  minio:
+    image: minio/minio
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001" 
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: ${MINIO_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${MINIO_HEALTHCHECK_TIMEOUT:-20s}
+      retries: ${MINIO_HEALTHCHECK_RETRIES:-3}
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   redis_data:
+  minio_data:
