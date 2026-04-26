@@ -1,21 +1,19 @@
-from sqlalchemy import DateTime, String, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.db.db import Base
+from app.db.base import Base
+from app.db.mixins import TimestampMixin, UUIDMixin
 
 
-class User(Base):
+class User(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "users"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(100), nullable=False)
-    email: Mapped[str] = mapped_column(
-        String(255), unique=True, nullable=False, index=True
-    )
-    password: Mapped[str] = mapped_column(String(128), nullable=False)
-    # todo: extract created_at to mixin
-    created_at: Mapped[DateTime] = mapped_column(
-        DateTime(timezone=True),
-        server_default=func.now(),
-        nullable=False,
-        index=True,
+
+    name: Mapped[str] = mapped_column(String(100))
+
+    email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+
+    password_hash: Mapped[str] = mapped_column(String(255))
+
+    workspaces: Mapped[list["Workspace"]] = relationship(
+        back_populates="owner", cascade="all, delete-orphan"
     )

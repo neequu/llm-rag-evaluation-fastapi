@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from uuid import UUID
 
 import bcrypt
 from jose import JWTError, jwt
@@ -26,7 +27,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
         return False
 
 
-def create_access_token(*, user_id: int) -> str:
+def create_access_token(*, user_id: UUID) -> str:
     expire = datetime.now(tz=timezone.utc) + timedelta(
         minutes=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES
     )
@@ -44,7 +45,7 @@ def create_access_token(*, user_id: int) -> str:
     )
 
 
-def decode_access_token(token: str) -> int:
+def decode_access_token(token: str) -> UUID:
     try:
         payload = jwt.decode(
             token, settings.JWT_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM]
@@ -52,12 +53,12 @@ def decode_access_token(token: str) -> int:
         user_id: str | None = payload.get("sub")
         if user_id is None:
             raise ValueError("Missing subject")
-        return int(user_id)
+        return UUID(user_id)
     except JWTError as exc:
         raise ValueError("Invalid token") from exc
 
 
-def create_refresh_token(*, user_id: int) -> str:
+def create_refresh_token(*, user_id: UUID) -> str:
     """Create a refresh token with longer expiry."""
     expire = datetime.now(tz=timezone.utc) + timedelta(
         days=settings.REFRESH_TOKEN_EXPIRE_DAYS
@@ -74,7 +75,7 @@ def create_refresh_token(*, user_id: int) -> str:
     )
 
 
-def decode_refresh_token(token: str) -> int:
+def decode_refresh_token(token: str) -> UUID:
     """Decode and validate refresh token."""
     try:
         payload = jwt.decode(
@@ -87,7 +88,7 @@ def decode_refresh_token(token: str) -> int:
         user_id: str | None = payload.get("sub")
         if user_id is None:
             raise ValueError("Missing subject")
-        return int(user_id)
+        return UUID(user_id)
     except JWTError as exc:
         raise ValueError("Invalid refresh token") from exc
 

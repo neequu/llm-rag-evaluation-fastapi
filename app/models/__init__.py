@@ -1,3 +1,4 @@
 from .user import User
+from .workspace import Workspace
 
-__all__ = ["User"]
+__all__ = ["User", "Workspace"]

@@ -28,7 +28,9 @@ async def create_user_service(*, db: DBSession, user_in: UserCreate):
         raise HTTPException(status_code=400, detail="Email already registered")
 
     user = User(
-        email=user_in.email, name=user_in.name, password=hash_password(user_in.password)
+        email=user_in.email,
+        name=user_in.name,
+        password_hash=hash_password(user_in.password),
     )
 
     db.add(user)
@@ -45,7 +47,7 @@ async def login_service(
 ):
     user = await get_by_email_service(db=db, email=credentials.email)
 
-    if not user or not verify_password(credentials.password, user.password):
+    if not user or not verify_password(credentials.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials",

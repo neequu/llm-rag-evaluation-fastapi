@@ -6,7 +6,7 @@ from app.crud.users import create_user_service, login_service
 from app.db.db import DBSession
 from app.schemas.users import LoginRequest, UserCreate, UserResponse
 
-router = APIRouter()
+router = APIRouter(tags=["Users"])
 
 
 @router.post("/sign-up", response_model=UserResponse)
