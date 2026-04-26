@@ -7,7 +7,7 @@ from app.crud.workspace import WorkspaceService
 from app.db.db import DBSession
 from app.models.user import User
 from app.models.workspace import Workspace
-from app.schemas.workspace import WorkspaceCreate, WorkspaceRead
+from app.schemas.workspace import WorkspaceCreate, WorkspaceRead, WorkspaceUpdate
 
 router = APIRouter(prefix="/workspaces", tags=["Workspaces"])
 
@@ -32,7 +32,24 @@ async def get_workspace_by_id(): ...
 async def get_user_workspaces(db: DBSession, user_id: UUID) -> list[Workspace]: ...
 
 
-async def update_workspace(): ...
+@router.patch(
+    "/{workspace_id}", response_model=WorkspaceRead, status_code=status.HTTP_200_OK
+)
+async def update_workspace(
+    workspace_id: UUID,
+    payload: WorkspaceUpdate,
+    db: DBSession,
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Updates a workspace by id for the authenticated user.
+    """
+    return await WorkspaceService.update_workspace(
+        workspace_id=workspace_id,
+        db=db,
+        schema=payload,
+        owner_id=current_user.id,
+    )
 
 
 async def delete_workspace(): ...
