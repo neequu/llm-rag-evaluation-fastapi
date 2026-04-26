@@ -6,6 +6,7 @@ from sqlalchemy import select
 from app.core.config import settings
 from app.core.security import (
     create_access_token,
+    create_refresh_token,
     decode_access_token,
     hash_password,
     verify_password,
@@ -41,7 +42,6 @@ async def login_service(
     db: DBSession,
     credentials: LoginRequest,
     response: Response,
-    # redis_client: RedisClient,
 ):
     user = await get_by_email_service(db=db, email=credentials.email)
 
@@ -52,15 +52,7 @@ async def login_service(
         )
 
     access_token = create_access_token(user_id=user.id)
-    # refresh_token = create_refresh_token()
-
-    # redis_key = f"refresh:{refresh_token}"
-
-    # await redis_client.set(
-    #     redis_key,
-    #     user.id,
-    #     ex=settings.refresh_token_expire_days * 86400,
-    # )
+    refresh_token = create_refresh_token(user_id=user.id)
 
     response.set_cookie(
         key="access_token",
@@ -68,55 +60,20 @@ async def login_service(
         httponly=True,
         secure=True,
         samesite="lax",
-        max_age=settings.jwt_expire_minutes * 60,
+        max_age=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60,
     )
     response.set_cookie(
         key="refresh_token",
-        # value=refresh_token,
+        value=refresh_token,
         httponly=True,
         secure=True,
         samesite="lax",
-        max_age=settings.refresh_token_expire_days * 86400,
+        max_age=settings.REFRESH_TOKEN_EXPIRE_DAYS * 24 * 60 * 60,
     )
 
-
-async def logout_service(
-    *,
-    response: Response,
-    refresh_token: Annotated[str | None, Cookie(include_in_schema=False)] = None,
-    # redis_client: RedisClient,
-):
-    # if refresh_token:
-    #     await redis_client.delete(f"refresh:{refresh_token}")
-
-    response.delete_cookie("access_token")
-    response.delete_cookie("refresh_token")
-    return {"message": "Logged out"}
-
-
-async def refresh_access_token_service(
-    *,
-    refresh_token: Annotated[str | None, Cookie(include_in_schema=False)] = None,
-    response: Response,
-    # redis_client: RedisClient,
-):
-    if refresh_token is None:
-        raise HTTPException(401, "Missing refresh token")
-
-    redis_key = f"refresh:{refresh_token}"
-    # user_id = await redis_client.get(redis_key)
-
-    # if user_id is None:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_401_UNAUTHORIZED,
-    #         detail="Invalid refresh token",
-    #     )
-
-    # new_access_token = create_access_token(user_id=int(user_id))
-
-    # response.set_cookie("access_token", new_access_token, httponly=True, secure=True)
-
-    return {"message": "refreshed"}
+    return {
+        "message": "Login successful",
+    }
 
 
 async def get_current_user(
