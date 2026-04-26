@@ -46,3 +46,54 @@ class WorkspaceService:
         await db.commit()
         await db.refresh(workspace)
         return workspace
+
+    @staticmethod
+    async def delete_workspace(
+        *, workspace_id: UUID, db: DBSession, owner_id: UUID
+    ) -> None:
+
+        query = select(Workspace).where(
+            Workspace.id == workspace_id, Workspace.owner_id == owner_id
+        )
+        result = await db.execute(query)
+
+        workspace = result.scalar_one_or_none()
+
+        if not workspace:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Workspace not found or unauthorized",
+            )
+        await db.delete(workspace)
+        await db.commit()
+        return None
+
+    @staticmethod
+    async def get_workspace_by_id(
+        *, workspace_id: UUID, db: DBSession, owner_id: UUID
+    ) -> Workspace:
+
+        query = select(Workspace).where(
+            Workspace.id == workspace_id, Workspace.owner_id == owner_id
+        )
+        result = await db.execute(query)
+
+        workspace = result.scalar_one_or_none()
+
+        if not workspace:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Workspace not found or unauthorized",
+            )
+
+        return workspace
+
+    @staticmethod
+    async def get_workspaces(*, db: DBSession, owner_id: UUID) -> list[Workspace]:
+
+        query = select(Workspace).where(Workspace.owner_id == owner_id)
+        result = await db.execute(query)
+
+        workspaces = result.scalars().all()
+
+        return list(workspaces)

@@ -26,10 +26,35 @@ async def create_workspace(
     )
 
 
-async def get_workspace_by_id(): ...
+@router.get(
+    "/{workspace_id}", response_model=WorkspaceRead, status_code=status.HTTP_200_OK
+)
+async def get_workspace_by_id(
+    workspace_id: UUID,
+    db: DBSession,
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Returns a workspace by id for the authenticated user.
+    """
+    return await WorkspaceService.get_workspace_by_id(
+        workspace_id=workspace_id,
+        db=db,
+        owner_id=current_user.id,
+    )
 
 
-async def get_user_workspaces(db: DBSession, user_id: UUID) -> list[Workspace]: ...
+@router.get("/", response_model=list[WorkspaceRead], status_code=status.HTTP_200_OK)
+async def get_user_workspaces(
+    db: DBSession, current_user: User = Depends(get_current_user)
+) -> list[Workspace]:
+    """
+    Returns all workspaces for the authenticated user.
+    """
+    return await WorkspaceService.get_workspaces(
+        db=db,
+        owner_id=current_user.id,
+    )
 
 
 @router.patch(
@@ -52,4 +77,15 @@ async def update_workspace(
     )
 
 
-async def delete_workspace(): ...
+@router.delete("/{workspace_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_workspace(
+    workspace_id: UUID,
+    db: DBSession,
+    current_user: User = Depends(get_current_user),
+):
+    """
+    Deletes a workspace by id for the authenticated user.
+    """
+    return await WorkspaceService.delete_workspace(
+        workspace_id=workspace_id, db=db, owner_id=current_user.id
+    )

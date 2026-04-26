@@ -32,7 +32,7 @@ async def login(
 
 
 @router.post("/refresh")
-async def refresh_token(request: Request, response: Response, db: DBSession):
+async def refresh_token(request: Request, response: Response):
     """Get a new access token using refresh token from cookies"""
     refresh_token = request.cookies.get("refresh_token")
 
