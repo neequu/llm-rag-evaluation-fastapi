@@ -19,3 +19,5 @@ class Workspace(Base, UUIDMixin, TimestampMixin):
     is_active: Mapped[bool] = mapped_column(default=True)
 
     owner: Mapped["User"] = relationship(back_populates="workspaces")
+
+    documents: Mapped[list["Document"]] = relationship(back_populates="workspace")

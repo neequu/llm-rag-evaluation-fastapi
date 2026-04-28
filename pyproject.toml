@@ -16,12 +16,7 @@ dependencies = [
     "passlib[bcrypt]>=1.7.4",
     "python-dotenv>=1.2.1",
     "python-jose[cryptography]>=3.5.0",
-    "taskiq>=0.12.2",
-    "taskiq-redis>=1.2.2",
-    "taskiq-fastapi>=0.5.0",
     "python-multipart>=0.0.26",
-    "aioboto3>=15.5.0",
-    "minio>=7.2.20",
 ]
 
 [tool.pylance]
@@ -31,3 +26,8 @@ reportAttributeAccessIssue = false
 [tool.pydantic-mypy]
 init_typed = true
 warn_required_dynamic_aliases = true
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.12",
+]
