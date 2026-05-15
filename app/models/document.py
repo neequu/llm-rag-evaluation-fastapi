@@ -32,7 +32,5 @@ class Document(Base, UUIDMixin, TimestampMixin):
     workspace_id: Mapped[UUID] = mapped_column(ForeignKey("workspaces.id"), index=True)
     uploader_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"), index=True)
 
-    workspace: Mapped["Workspace"] = relationship(
-        back_populates="documents", cascade="all, delete-orphan"
-    )
-    uploader: Mapped["User"] = relationship()
+    workspace: Mapped["Workspace"] = relationship(back_populates="documents")
+    uploader: Mapped["User"] = relationship(back_populates="documents")

@@ -17,3 +17,7 @@ class User(Base, UUIDMixin, TimestampMixin):
     workspaces: Mapped[list["Workspace"]] = relationship(
         back_populates="owner", cascade="all, delete-orphan"
     )
+
+    documents: Mapped[list["Document"]] = relationship(
+        back_populates="uploader", cascade="all, delete-orphan"
+    )

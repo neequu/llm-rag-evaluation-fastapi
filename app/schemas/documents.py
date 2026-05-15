@@ -2,7 +2,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 
-from .models import DocumentState
+from ..models.document import DocumentState
 
 
 class DocumentRead(BaseModel):

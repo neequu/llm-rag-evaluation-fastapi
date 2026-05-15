@@ -10,13 +10,13 @@ dependencies = [
     "fastapi[standard]>=0.136.1",
     "pydantic-settings>=2.14.0",
     "redis>=7.4.0",
-    "ruff>=0.15.12",
     "sqlalchemy[asyncio]>=2.0.0",
     "uvicorn[standard]>=0.46.0",
     "passlib[bcrypt]>=1.7.4",
     "python-dotenv>=1.2.1",
     "python-jose[cryptography]>=3.5.0",
     "python-multipart>=0.0.26",
+    "aioboto3>=15.5.0",
 ]
 
 [tool.pylance]

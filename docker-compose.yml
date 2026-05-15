@@ -3,17 +3,21 @@ services:
     build: .
     ports:
       - "${APP_PORT:-8000}:8000"
-    env_file: .env
+    env_file: .env.docker
     depends_on:
       db:
         condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
+      minio:
+        condition: service_healthy
     volumes:
       - .:/app
+      - /app/.venv
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - REDIS_URL=${REDIS_URL}
+    restart: unless-stopped
 
   db:
     image: pgvector/pgvector:pg16
@@ -46,21 +50,21 @@ services:
     restart: unless-stopped
 
   minio:
-    image: minio/minio
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
     ports:
-      - "${MINIO_API_PORT:-9000}:9000"
-      - "${MINIO_CONSOLE_PORT:-9001}:9001" 
+      - "${MINIO_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
     environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
     volumes:
       - minio_data:/data
-    command: server /data --console-address ":9001"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: ${MINIO_HEALTHCHECK_INTERVAL:-30s}
-      timeout: ${MINIO_HEALTHCHECK_TIMEOUT:-20s}
-      retries: ${MINIO_HEALTHCHECK_RETRIES:-3}
+      interval: ${MINIO_HEALTHCHECK_INTERVAL:-10s}
+      timeout: ${MINIO_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${MINIO_HEALTHCHECK_RETRIES:-5}
     restart: unless-stopped
 
 volumes:
