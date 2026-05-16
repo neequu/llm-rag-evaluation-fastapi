@@ -4,7 +4,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 
 from app.db.db import DBSession
-from app.models.document import Document
+from app.models.document import Document, DocumentState
 from app.models.workspace import Workspace
 from app.schemas.documents import DocumentCreate
 
@@ -96,3 +96,25 @@ class DocumentService:
             )
 
         return document
+
+    @staticmethod
+    async def update_status(
+        *,
+        db: DBSession,
+        document_id: UUID,
+        status: DocumentState,
+        error_message: str | None = None,
+    ):
+        query = select(Document).where(Document.id == document_id)
+
+        result = await db.execute(query)
+
+        document = result.scalar_one_or_none()
+
+        if not document:
+            return
+
+        document.status = status
+        document.error_message = error_message
+
+        await db.commit()

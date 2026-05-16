@@ -4,6 +4,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 
+from app.core.queue import get_redis
 from app.core.s3 import s3_client
 from app.crud.documents import DocumentService
 from app.crud.workspace import WorkspaceService
@@ -148,6 +149,13 @@ async def upload_file(
             s3_key=object_key,
             workspace_id=workspace_id,
         ),
+    )
+
+    redis = await get_redis()
+
+    await redis.enqueue_job(
+        "ingest_document",
+        str(document.id),
     )
 
     return document

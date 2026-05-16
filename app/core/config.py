@@ -23,7 +23,9 @@ class Settings(BaseSettings):
 
     # ── Redis ─────────────────────────────────────────────────────────────────
     REDIS_PORT: int = 6379
-    REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_HOST: str = "localhost"
+
+    REDIS_URL: str = f"redis://{REDIS_HOST}:{REDIS_PORT}"
 
     # ── MinIO / S3 ────────────────────────────────────────────────────────────
     MINIO_ENDPOINT: str = "localhost:9000"

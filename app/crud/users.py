@@ -74,7 +74,3 @@ class UserService:
         return {
             "message": "Login successful",
         }
-
-
-def get_user_service() -> UserService:
-    return UserService()
