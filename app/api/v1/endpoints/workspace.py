@@ -151,3 +151,43 @@ async def upload_file(
     )
 
     return document
+
+
+@router.get(
+    "/{workspace_id}/documents",
+    response_model=list[DocumentRead],
+    status_code=status.HTTP_200_OK,
+)
+async def get_workspace_documents(
+    workspace_id: UUID,
+    current_user: CurrentUser,
+    db: DBSession,
+):
+    documents = await DocumentService.get_documents(
+        db=db,
+        workspace_id=workspace_id,
+        owner_id=current_user.id,
+    )
+
+    return documents
+
+
+@router.get(
+    "/{workspace_id}/documents/{document_id}",
+    response_model=DocumentRead,
+    status_code=status.HTTP_200_OK,
+)
+async def get_workspace_document(
+    workspace_id: UUID,
+    document_id: UUID,
+    current_user: CurrentUser,
+    db: DBSession,
+):
+    document = await DocumentService.get_document(
+        db=db,
+        document_id=document_id,
+        workspace_id=workspace_id,
+        owner_id=current_user.id,
+    )
+
+    return document
