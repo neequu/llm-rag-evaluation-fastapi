@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Request, Response, status
 from app.core.config import settings
 from app.core.security import refresh_access_token
 from app.crud.users import UserService
-from app.db.db import DBSession
+from app.db.db import AsyncSession
 from app.schemas.users import LoginRequest, UserCreate, UserResponse
 
 router = APIRouter(tags=["Users"])
@@ -12,7 +12,7 @@ user_service = UserService()
 
 
 @router.post("/sign-up", response_model=UserResponse)
-async def create_user(db: DBSession, user_in: UserCreate):
+async def create_user(db: AsyncSession, user_in: UserCreate):
     user = await user_service.create_user(db=db, user_in=user_in)
 
     return user
@@ -20,7 +20,7 @@ async def create_user(db: DBSession, user_in: UserCreate):
 
 @router.post("/login")
 async def login(
-    db: DBSession,
+    db: AsyncSession,
     credentials: LoginRequest,
     response: Response,
 ):

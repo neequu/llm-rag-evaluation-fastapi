@@ -8,18 +8,18 @@ from app.core.security import (
     hash_password,
     verify_password,
 )
-from app.db.db import DBSession
+from app.db.db import AsyncSession
 from app.models import User
 from app.schemas.users import LoginRequest, UserCreate
 
 
 class UserService:
     @staticmethod
-    async def _get_by_email(*, db: DBSession, email: str):
+    async def _get_by_email(*, db: AsyncSession, email: str):
         result = await db.scalar(select(User).filter_by(email=email))
         return result
 
-    async def create_user(self, *, db: DBSession, user_in: UserCreate):
+    async def create_user(self, *, db: AsyncSession, user_in: UserCreate):
         existing_user = await self._get_by_email(db=db, email=user_in.email)
 
         if existing_user:
@@ -39,7 +39,7 @@ class UserService:
     async def login(
         self,
         *,
-        db: DBSession,
+        db: AsyncSession,
         credentials: LoginRequest,
         response: Response,
     ):

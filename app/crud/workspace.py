@@ -3,7 +3,7 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy import select
 
-from app.db.db import DBSession
+from app.db.db import AsyncSession
 from app.models.workspace import Workspace
 from app.schemas.workspace import WorkspaceCreate, WorkspaceUpdate
 
@@ -11,7 +11,7 @@ from app.schemas.workspace import WorkspaceCreate, WorkspaceUpdate
 class WorkspaceService:
     @staticmethod
     async def create_workspace(
-        *, db: DBSession, schema: WorkspaceCreate, owner_id: UUID
+        *, db: AsyncSession, schema: WorkspaceCreate, owner_id: UUID
     ) -> Workspace:
         new_workspace = Workspace(**schema.model_dump(), owner_id=owner_id)
 
@@ -22,7 +22,7 @@ class WorkspaceService:
 
     @staticmethod
     async def update_workspace(
-        *, workspace_id: UUID, db: DBSession, schema: WorkspaceUpdate, owner_id: UUID
+        *, workspace_id: UUID, db: AsyncSession, schema: WorkspaceUpdate, owner_id: UUID
     ) -> Workspace:
 
         query = select(Workspace).where(
@@ -49,7 +49,7 @@ class WorkspaceService:
 
     @staticmethod
     async def delete_workspace(
-        *, workspace_id: UUID, db: DBSession, owner_id: UUID
+        *, workspace_id: UUID, db: AsyncSession, owner_id: UUID
     ) -> None:
 
         query = select(Workspace).where(
@@ -70,7 +70,7 @@ class WorkspaceService:
 
     @staticmethod
     async def get_workspace_by_id(
-        *, workspace_id: UUID, db: DBSession, owner_id: UUID
+        *, workspace_id: UUID, db: AsyncSession, owner_id: UUID
     ) -> Workspace:
 
         query = select(Workspace).where(
@@ -89,7 +89,7 @@ class WorkspaceService:
         return workspace
 
     @staticmethod
-    async def get_workspaces(*, db: DBSession, owner_id: UUID) -> list[Workspace]:
+    async def get_workspaces(*, db: AsyncSession, owner_id: UUID) -> list[Workspace]:
 
         query = select(Workspace).where(Workspace.owner_id == owner_id)
         result = await db.execute(query)

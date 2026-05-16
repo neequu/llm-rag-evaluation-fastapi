@@ -8,7 +8,7 @@ from app.core.queue import get_redis
 from app.core.s3 import s3_client
 from app.crud.documents import DocumentService
 from app.crud.workspace import WorkspaceService
-from app.db.db import DBSession
+from app.db.db import AsyncSession
 from app.dependencies.auth import CurrentUser
 from app.models.workspace import Workspace
 from app.schemas.documents import DocumentCreate, DocumentRead
@@ -21,7 +21,7 @@ router = APIRouter(prefix="/workspaces", tags=["Workspaces"])
 
 @router.post("/", response_model=WorkspaceRead, status_code=status.HTTP_201_CREATED)
 async def create_workspace(
-    payload: WorkspaceCreate, db: DBSession, current_user: CurrentUser
+    payload: WorkspaceCreate, db: AsyncSession, current_user: CurrentUser
 ):
     """
     Creates a new workspace for the authenticated user.
@@ -36,7 +36,7 @@ async def create_workspace(
 )
 async def get_workspace_by_id(
     workspace_id: UUID,
-    db: DBSession,
+    db: AsyncSession,
     current_user: CurrentUser,
 ):
     """
@@ -51,7 +51,7 @@ async def get_workspace_by_id(
 
 @router.get("/", response_model=list[WorkspaceRead], status_code=status.HTTP_200_OK)
 async def get_user_workspaces(
-    db: DBSession, current_user: CurrentUser
+    db: AsyncSession, current_user: CurrentUser
 ) -> list[Workspace]:
     """
     Returns all workspaces for the authenticated user.
@@ -68,7 +68,7 @@ async def get_user_workspaces(
 async def update_workspace(
     workspace_id: UUID,
     payload: WorkspaceUpdate,
-    db: DBSession,
+    db: AsyncSession,
     current_user: CurrentUser,
 ):
     """
@@ -85,7 +85,7 @@ async def update_workspace(
 @router.delete("/{workspace_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_workspace(
     workspace_id: UUID,
-    db: DBSession,
+    db: AsyncSession,
     current_user: CurrentUser,
 ):
     """
@@ -115,7 +115,7 @@ async def upload_file(
     workspace_id: UUID,
     file: Annotated[UploadFile, File(description="File to upload")],
     current_user: CurrentUser,
-    db: DBSession,
+    db: AsyncSession,
 ):
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(
@@ -169,7 +169,7 @@ async def upload_file(
 async def get_workspace_documents(
     workspace_id: UUID,
     current_user: CurrentUser,
-    db: DBSession,
+    db: AsyncSession,
 ):
     documents = await DocumentService.get_documents(
         db=db,
@@ -189,7 +189,7 @@ async def get_workspace_document(
     workspace_id: UUID,
     document_id: UUID,
     current_user: CurrentUser,
-    db: DBSession,
+    db: AsyncSession,
 ):
     document = await DocumentService.get_document(
         db=db,

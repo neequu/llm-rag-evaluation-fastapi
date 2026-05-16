@@ -5,13 +5,13 @@ from fastapi import Cookie, Depends, HTTPException, status
 from app.core.security import (
     decode_access_token,
 )
-from app.db.db import DBSession
+from app.db.db import AsyncSession
 from app.models.user import User
 
 
 async def get_current_user(
     *,
-    db: DBSession,
+    db: AsyncSession,
     access_token: Annotated[str | None, Cookie(include_in_schema=False)] = None,
 ) -> User:
     if access_token is None:

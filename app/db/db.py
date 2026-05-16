@@ -1,7 +1,8 @@
 from typing import Annotated, AsyncGenerator
 
 from fastapi import Depends
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession as SQAsyncSession
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 from app.core.config import settings
 
@@ -19,11 +20,11 @@ AsyncSessionLocal = async_sessionmaker(
     autoflush=False,
     autocommit=False,
     expire_on_commit=False,
-    class_=AsyncSession,
+    class_=SQAsyncSession,
 )
 
 
-async def get_db() -> AsyncGenerator[AsyncSession, None]:
+async def get_db() -> AsyncGenerator[SQAsyncSession, None]:
     async with AsyncSessionLocal() as session:
         try:
             yield session
@@ -31,7 +32,7 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
             await session.close()
 
 
-DBSession = Annotated[
-    AsyncSession,
+AsyncSession = Annotated[
+    SQAsyncSession,
     Depends(get_db),
 ]

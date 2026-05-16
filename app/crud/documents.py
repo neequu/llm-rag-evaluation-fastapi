@@ -3,14 +3,14 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy import select
 
-from app.db.db import DBSession
+from app.db.db import AsyncSession
 from app.models.document import Document, DocumentState
 from app.models.workspace import Workspace
 from app.schemas.documents import DocumentCreate
 
 
 async def check_workspace_ownership(
-    *, db: DBSession, workspace_id: UUID, owner_id: UUID
+    *, db: AsyncSession, workspace_id: UUID, owner_id: UUID
 ):
     workspace_query = select(Workspace).where(
         Workspace.id == workspace_id, Workspace.owner_id == owner_id
@@ -32,7 +32,7 @@ class DocumentService:
     @staticmethod
     async def create_document(
         *,
-        db: DBSession,
+        db: AsyncSession,
         data: DocumentCreate,
         uploader_id: UUID,
     ) -> Document:
@@ -50,7 +50,7 @@ class DocumentService:
     @staticmethod
     async def get_documents(
         *,
-        db: DBSession,
+        db: AsyncSession,
         owner_id: UUID,
         workspace_id: UUID,
     ) -> list[Document]:
@@ -71,7 +71,7 @@ class DocumentService:
     @staticmethod
     async def get_document(
         *,
-        db: DBSession,
+        db: AsyncSession,
         owner_id: UUID,
         workspace_id: UUID,
         document_id: UUID,
@@ -100,7 +100,7 @@ class DocumentService:
     @staticmethod
     async def update_status(
         *,
-        db: DBSession,
+        db: AsyncSession,
         document_id: UUID,
         status: DocumentState,
         error_message: str | None = None,

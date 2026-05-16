@@ -86,17 +86,11 @@ class Settings(BaseSettings):
         return self.APP_ENV == "production"
 
 
-# lru_cache ensures Settings is instantiated exactly once for the entire
-# process lifetime. This is important: pydantic-settings reads from env/file
-# on __init__, so calling Settings() repeatedly would re-parse on every call.
-# Using get_settings() as a FastAPI dependency also makes it trivially
-# replaceable in tests via app.dependency_overrides.
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
     return Settings()  # type: ignore[call-arg]
 
 
-# Module-level singleton for non-DI usage (worker entrypoint, scripts, etc.)
 settings = get_settings()
 
 SettingsDep = Annotated[Settings, Depends(get_settings)]
