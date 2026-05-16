@@ -10,7 +10,10 @@ from app.db.mixins import UUIDMixin
 class DocumentChunk(Base, UUIDMixin):
     __tablename__ = "document_chunks"
 
-    document_id: Mapped[UUID] = mapped_column(ForeignKey("documents.id"), index=True)
+    document_id: Mapped[UUID] = mapped_column(
+        ForeignKey("documents.id", ondelete="CASCADE"),
+        index=True,
+    )
     chunk_index: Mapped[int]
     content: Mapped[str]
     token_count: Mapped[int | None]

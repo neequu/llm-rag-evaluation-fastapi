@@ -76,7 +76,7 @@ services:
       CHROMA_SERVER_HOST: 0.0.0.0
       CHROMA_SERVER_HTTP_PORT: 8002
     volumes:
-      - chroma_data:/chroma/chroma
+      - chroma_data:/data
     ports:
       - "8002:8000"
     healthcheck:
@@ -86,8 +86,18 @@ services:
       retries: 5
     restart: unless-stopped
 
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+
 volumes:
   postgres_data:
   redis_data:
   minio_data:
   chroma_data:
+  ollama_data:

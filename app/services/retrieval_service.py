@@ -43,7 +43,11 @@ class RetrievalService:
 
             db_result = await db.execute(db_query)
 
-            chunk = db_result.scalar_one()
+            chunk = db_result.scalar_one_or_none()
+
+            if chunk is None:
+                print(f"Warning: Chunk with chroma_id {chunk_id} not found in database")
+                continue
 
             results.append(
                 RetrievalResult(

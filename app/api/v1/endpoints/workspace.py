@@ -154,8 +154,6 @@ async def upload_file(
     await redis.enqueue_job(
         "ingest_document",
         document.id,
-        workspace_id,
-        current_user.id,
     )
 
     return document

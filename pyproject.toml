@@ -22,6 +22,7 @@ dependencies = [
     "sentence-transformers>=5.5.0",
     "chromadb>=1.5.9",
     "anyio>=4.13.0",
+    "httpx>=0.28.1",
 ]
 
 [tool.pylance]

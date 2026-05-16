@@ -51,4 +51,6 @@ class Document(Base, UUIDMixin, TimestampMixin):
 
     workspace: Mapped["Workspace"] = relationship(back_populates="documents")
     uploader: Mapped["User"] = relationship(back_populates="documents")
-    chunks: Mapped[list["DocumentChunk"]] = relationship(back_populates="document")
+    chunks: Mapped[list["DocumentChunk"]] = relationship(
+        back_populates="document", cascade="all, delete-orphan"
+    )
