@@ -1,14 +1,16 @@
 from uuid import UUID
 
 from app.core.s3 import s3_client
-from app.crud.chunking import chunk_text
 from app.crud.documents import DocumentService
 from app.db.db import AsyncSessionLocal
 from app.models.document import DocumentState
 from app.models.document_chunk import DocumentChunk
+from app.services.chroma_service import chroma_service
+from app.services.chunking import chunk_text
+from app.services.embedding_service import generate_embeddings
 
 
-async def ingest_document(ctx, document_id: UUID, workspace_id: UUID, owner_id: UUID):
+async def ingest_document(ctx, document_id: UUID):
     async with AsyncSessionLocal() as db:
         try:
             await DocumentService.update_status(
@@ -17,11 +19,9 @@ async def ingest_document(ctx, document_id: UUID, workspace_id: UUID, owner_id: 
                 status=DocumentState.PROCESSING,
             )
 
-            document = await DocumentService.get_document(
+            document = await DocumentService.get_by_id(
                 db=db,
                 document_id=document_id,
-                owner_id=owner_id,
-                workspace_id=workspace_id,
             )
 
             file_bytes = await s3_client.download_file(document.s3_key)
@@ -30,27 +30,54 @@ async def ingest_document(ctx, document_id: UUID, workspace_id: UUID, owner_id: 
 
             chunks = chunk_text(text)
 
-            total_tokens = 0
-            db_chunks = []
+            embeddings = generate_embeddings(chunks)
 
-            for i, chunk in enumerate(chunks):
-                chunk_tokens = len(chunk.split())
-                total_tokens += chunk_tokens
+            db_chunks = []
+            chroma_chunks = []
+
+            total_tokens = 0
+
+            for i, (chunk, embedding) in enumerate(
+                zip(chunks, embeddings, strict=False)
+            ):
+                token_count = len(chunk.split())
+
+                total_tokens += token_count
+
+                chroma_id = f"{document.id}_{i}"
 
                 db_chunks.append(
                     DocumentChunk(
                         document_id=document.id,
                         chunk_index=i,
                         content=chunk,
-                        token_count=chunk_tokens,
-                        chroma_id=None,
+                        token_count=token_count,
+                        chroma_id=chroma_id,
                     )
+                )
+
+                chroma_chunks.append(
+                    {
+                        "id": chroma_id,
+                        "document": chunk,
+                        "embedding": embedding,
+                        "metadata": {
+                            "document_id": str(document.id),
+                            "workspace_id": str(document.workspace_id),
+                            "chunk_index": i,
+                        },
+                    }
                 )
 
             db.add_all(db_chunks)
 
             document.chunk_count = len(chunks)
             document.token_count = total_tokens
+
+            await chroma_service.add_chunks(
+                workspace_id=str(document.workspace_id),
+                chunks=chroma_chunks,
+            )
 
             await db.commit()
 

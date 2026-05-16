@@ -69,6 +69,26 @@ class DocumentService:
         return list(documents)
 
     @staticmethod
+    async def get_by_id(
+        *,
+        db: AsyncSession,
+        document_id: UUID,
+    ) -> Document:
+        query = select(Document).where(Document.id == document_id)
+
+        result = await db.execute(query)
+
+        document = result.scalar_one_or_none()
+
+        if not document:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Document not found",
+            )
+
+        return document
+
+    @staticmethod
     async def get_document(
         *,
         db: AsyncSession,

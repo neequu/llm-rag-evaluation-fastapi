@@ -20,6 +20,8 @@ dependencies = [
     "arq>=0.25.0",
     "pgvector>=0.4.2",
     "sentence-transformers>=5.5.0",
+    "chromadb>=1.5.9",
+    "anyio>=4.13.0",
 ]
 
 [tool.pylance]

@@ -85,6 +85,9 @@ class Settings(BaseSettings):
     def is_production(self) -> bool:
         return self.APP_ENV == "production"
 
+    CHROMA_HOST: str = "localhost"
+    CHROMA_PORT: int = 8002
+
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
