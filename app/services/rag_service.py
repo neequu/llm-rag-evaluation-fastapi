@@ -16,6 +16,7 @@ class RAGService:
         strategy: str,
         limit: int = 5,
     ):
+        retrieval_start = time.perf_counter()
 
         if strategy == StrategyName.DENSE:
             retrieval_results = await RetrievalService.dense_search(
@@ -44,6 +45,8 @@ class RAGService:
         else:
             raise ValueError("Invalid retrieval strategy")
 
+        retrieval_latency_ms = (time.perf_counter() - retrieval_start) * 1000
+
         contexts = [r.content for r in retrieval_results]
 
         prompt = build_rag_prompt(
@@ -51,15 +54,18 @@ class RAGService:
             contexts=contexts,
         )
 
-        start = time.perf_counter()
-
+        generation_start = time.perf_counter()
         answer = await ollama_service.generate(prompt)
 
-        latency_ms = (time.perf_counter() - start) * 1000
+        generation_latency_ms = (time.perf_counter() - generation_start) * 1000
+
+        total_latency_ms = retrieval_latency_ms + generation_latency_ms
 
         return {
             "answer": answer,
             "retrieved_chunks": contexts,
             "retrieval_strategy": strategy,
-            "generation_latency_ms": latency_ms,
+            "generation_latency_ms": generation_latency_ms,
+            "retrieval_latency_ms": retrieval_latency_ms,
+            "total_latency_ms": total_latency_ms,
         }

@@ -14,3 +14,5 @@ class RAGResponse(BaseModel):
     retrieved_chunks: list[str]
     retrieval_strategy: str
     generation_latency_ms: float
+    retrieval_latency_ms: float
+    total_latency_ms: float

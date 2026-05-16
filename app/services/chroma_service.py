@@ -59,9 +59,7 @@ class ChromaService:
             after_count = await anyio.to_thread.run_sync(add_to_chroma)
 
             print(f"📊 After add - collection has {after_count} chunks")
-            print(
-                f"✅ Expected to add {len(chunks)}, actual increase: {after_count - before_count}"
-            )
+            print(f"✅ Expected to add {len(chunks)}")
 
             def check_chunk_exists(chunk_id):
                 try:

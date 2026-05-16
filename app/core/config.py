@@ -90,6 +90,7 @@ class Settings(BaseSettings):
 
     OLLAMA_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "llama3"
+    # OLLAMA_MODEL: str = "tinyllama"
 
 
 @lru_cache(maxsize=1)
