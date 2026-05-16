@@ -38,8 +38,6 @@ def create_access_token(*, user_id: UUID) -> str:
         "type": "access",
     }
 
-    print(settings)
-
     return jwt.encode(
         payload, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM
     )
