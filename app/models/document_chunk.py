@@ -1,8 +1,7 @@
 from uuid import UUID
 
-from pgvector import Vector
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import ForeignKey, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 from app.db.mixins import UUIDMixin
@@ -11,13 +10,10 @@ from app.db.mixins import UUIDMixin
 class DocumentChunk(Base, UUIDMixin):
     __tablename__ = "document_chunks"
 
-    document_id: Mapped[UUID] = mapped_column(
-        ForeignKey("documents.id"),
-        index=True,
-    )
-
+    document_id: Mapped[UUID] = mapped_column(ForeignKey("documents.id"), index=True)
     chunk_index: Mapped[int]
-
     content: Mapped[str]
+    token_count: Mapped[int | None]
+    chroma_id: Mapped[str | None] = mapped_column(String(255), unique=True)
 
-    embedding: Mapped[Vector] = mapped_column(Vector(384))
+    document: Mapped["Document"] = relationship(back_populates="chunks")

@@ -97,12 +97,10 @@ async def delete_workspace(
 
 
 ALLOWED_CONTENT_TYPES = {
-    "image/jpeg",
-    "image/png",
-    "image/webp",
-    "application/pdf",
     "text/plain",
     "text/csv",
+    "text/markdown",
+    "application/octet-stream",
 }
 
 MAX_FILE_SIZE = 100 * 1024 * 1024
@@ -155,7 +153,9 @@ async def upload_file(
 
     await redis.enqueue_job(
         "ingest_document",
-        str(document.id),
+        document.id,
+        workspace_id,
+        current_user.id,
     )
 
     return document

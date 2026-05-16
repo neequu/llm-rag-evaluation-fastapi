@@ -187,5 +187,21 @@ class S3Client:
                     return False
                 raise
 
+    async def download_file(
+        self,
+        object_key: str,
+        bucket: str | None = None,
+    ) -> bytes:
+        bucket = bucket or settings.MINIO_BUCKET_NAME
+
+        async with self._client() as client:
+            response = await client.get_object(
+                Bucket=bucket,
+                Key=object_key,
+            )
+
+            async with response["Body"] as stream:
+                return await stream.read()
+
 
 s3_client = S3Client()
