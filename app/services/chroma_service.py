@@ -56,9 +56,10 @@ class ChromaService:
         collection = self.get_collection(workspace_id)
 
         result = await anyio.to_thread.run_sync(
-            collection.query,
-            query_embeddings=[embedding],
-            n_results=limit,
+            lambda: collection.query(
+                query_embeddings=[embedding],
+                n_results=limit,
+            )
         )
 
         return result
