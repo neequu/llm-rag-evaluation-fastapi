@@ -47,7 +47,15 @@ class RAGService:
 
         retrieval_latency_ms = (time.perf_counter() - retrieval_start) * 1000
 
-        contexts = [r.content for r in retrieval_results]
+        MAX_CHUNKS = 2  # Try 2 instead of 5
+        MAX_CHARS_PER_CHUNK = 400
+
+        contexts = []
+        for r in retrieval_results[:MAX_CHUNKS]:
+            content = r.content
+            if len(content) > MAX_CHARS_PER_CHUNK:
+                content = content[:MAX_CHARS_PER_CHUNK] + "..."
+            contexts.append(content)
 
         prompt = build_rag_prompt(
             query=query,

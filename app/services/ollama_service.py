@@ -19,6 +19,7 @@ class OllamaService:
                         "options": {
                             "num_predict": 100,
                             "temperature": 0.3,
+                            "stop": ["\n\n\n", "Context:", "Question:"],
                         },
                     },
                 )
