@@ -26,8 +26,6 @@ class RetrievalService:
             limit=limit,
         )
 
-        print(results)
-
         chunk_ids = results["ids"][0]
 
         stmt = select(DocumentChunk).where(DocumentChunk.chroma_id.in_(chunk_ids))

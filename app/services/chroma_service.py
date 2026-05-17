@@ -12,8 +12,8 @@ class ChromaService:
     def client(self):
         if self._client is None:
             self._client = chromadb.HttpClient(
-                host="localhost",
-                port=8002,
+                host=settings.CHROMA_HOST,
+                port=settings.CHROMA_PORT,
             )
         return self._client
 
@@ -32,7 +32,7 @@ class ChromaService:
         chunks: list[dict],
     ):
         if not chunks:
-            print("⚠️ No chunks to add, returning early")
+            print("No chunks to add, returning early")
             return
 
         collection = self.get_collection(workspace_id)
@@ -56,16 +56,11 @@ class ChromaService:
                 )
                 return collection.count()
 
-            after_count = await anyio.to_thread.run_sync(add_to_chroma)
-
-            print(f"📊 After add - collection has {after_count} chunks")
-            print(f"✅ Expected to add {len(chunks)}")
-
             def check_chunk_exists(chunk_id):
                 try:
                     result = collection.get(ids=[chunk_id])
                     return len(result["ids"]) > 0
-                except:
+                except Exception:
                     return False
 
             first_id = ids[0]
@@ -74,8 +69,7 @@ class ChromaService:
             )
             print(f"🔍 First chunk '{first_id}' exists in ChromaDB: {exists}")
 
-        except Exception as e:
-            print(f"❌ ChromaDB add failed: {type(e).__name__}: {e}")
+        except Exception:
             import traceback
 
             traceback.print_exc()

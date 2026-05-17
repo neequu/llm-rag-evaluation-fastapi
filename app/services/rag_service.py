@@ -47,7 +47,7 @@ class RAGService:
 
         retrieval_latency_ms = (time.perf_counter() - retrieval_start) * 1000
 
-        MAX_CHUNKS = 2  # Try 2 instead of 5
+        MAX_CHUNKS = 2
         MAX_CHARS_PER_CHUNK = 400
 
         contexts = []

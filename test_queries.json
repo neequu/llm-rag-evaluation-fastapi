@@ -18,7 +18,6 @@
   {"query": "How do I use async SQLAlchemy with FastAPI?", "ground_truth": "Use create_async_engine and AsyncSession from sqlalchemy.ext.asyncio; define an async dependency that yields a session."},
   {"query": "What is Alembic and how do I set it up?", "ground_truth": "Alembic is a database migration tool for SQLAlchemy. Run alembic init alembic to create config, set sqlalchemy.url in alembic.ini, then use alembic revision --autogenerate and alembic upgrade head."},
   {"query": "How do I handle CORS in FastAPI?", "ground_truth": "Add CORSMiddleware from fastapi.middleware.cors with app.add_middleware(), specifying allow_origins, allow_methods, and allow_headers."},
-  {"query": "What are middleware in FastAPI?", "ground_truth": "Middleware are functions that process every request/response; add them with app.add_middleware() or define with @app.middleware('http')."},
   {"query": "How do I use background tasks in FastAPI?", "ground_truth": "Import BackgroundTasks, add it as a parameter, then call background_tasks.add_task(function, *args) to run after the response."},
   {"query": "What is the lifespan event in FastAPI?", "ground_truth": "The lifespan parameter accepts an async context manager that handles startup and shutdown logic, replacing the deprecated on_event decorators."},
   {"query": "How do I raise HTTP exceptions in FastAPI?", "ground_truth": "Import HTTPException and raise it with status_code and detail parameters, e.g. raise HTTPException(status_code=404, detail='Item not found')."},
@@ -92,8 +91,5 @@
   {"query": "What is APIRouter prefix parameter?", "ground_truth": "The prefix parameter prepends a URL path segment to all routes in the router, e.g. APIRouter(prefix='/api/v1')."},
   {"query": "How do I add custom OpenAPI paths in FastAPI?", "ground_truth": "Override app.openapi() to modify the schema dict returned, or use the openapi_extra parameter on individual route decorators."},
   {"query": "What is the Annotated Depends pattern?", "ground_truth": "Use CurrentUser = Annotated[User, Depends(get_current_user)] and then declare it as a function parameter type for cleaner route signatures."},
-  {"query": "How do I stream large file uploads in FastAPI?", "ground_truth": "Use UploadFile.read(chunk_size) in a loop or iterate over request.stream() to process chunks without loading the entire file into memory."},
-  {"query": "What is response_model_include in FastAPI?", "ground_truth": "response_model_include takes a set of field names; only those fields are included in the serialized response, ignoring all others."},
-  {"query": "How do I add API versioning in FastAPI?", "ground_truth": "Use APIRouter with versioned prefixes (/v1, /v2), or mount separate FastAPI sub-applications for major versions with app.mount()."},
-  {"query": "How do I add health check endpoints in FastAPI?", "ground_truth": "Create a GET /health route that checks database connectivity, cache availability, and external services; return JSON with status for each."}
+  {"query": "What is response_model_include in FastAPI?", "ground_truth": "response_model_include takes a set of field names; only those fields are included in the serialized response, ignoring all others."}
 ]
