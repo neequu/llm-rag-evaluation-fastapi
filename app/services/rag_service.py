@@ -51,11 +51,14 @@ class RAGService:
         MAX_CHARS_PER_CHUNK = 400
 
         contexts = []
+        # contexts2 = []
+
         for r in retrieval_results[:MAX_CHUNKS]:
             content = r.content
             if len(content) > MAX_CHARS_PER_CHUNK:
                 content = content[:MAX_CHARS_PER_CHUNK] + "..."
             contexts.append(content)
+            # contexts2.append({"chunk_id": r.id, "content": content})
 
         prompt = build_rag_prompt(
             query=query,
@@ -72,6 +75,7 @@ class RAGService:
         return {
             "answer": answer,
             "retrieved_chunks": contexts,
+            # "retrieved_chunks": contexts2,
             "retrieval_strategy": strategy,
             "generation_latency_ms": generation_latency_ms,
             "retrieval_latency_ms": retrieval_latency_ms,

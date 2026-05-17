@@ -12,6 +12,7 @@ class RAGRequest(BaseModel):
 class RAGResponse(BaseModel):
     answer: str
     retrieved_chunks: list[str]
+    # retrieved_chunks: list
     retrieval_strategy: str
     generation_latency_ms: float
     retrieval_latency_ms: float

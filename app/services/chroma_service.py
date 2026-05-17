@@ -56,6 +56,11 @@ class ChromaService:
                 )
                 return collection.count()
 
+            after_count = await anyio.to_thread.run_sync(add_to_chroma)
+
+            print(f"After add - collection has {after_count} chunks")
+            print(f"Expected to add {len(chunks)}")
+
             def check_chunk_exists(chunk_id):
                 try:
                     result = collection.get(ids=[chunk_id])
@@ -67,9 +72,10 @@ class ChromaService:
             exists = await anyio.to_thread.run_sync(
                 lambda: check_chunk_exists(first_id)
             )
-            print(f"🔍 First chunk '{first_id}' exists in ChromaDB: {exists}")
+            print(f"First chunk '{first_id}' exists in ChromaDB: {exists}")
 
-        except Exception:
+        except Exception as e:
+            print(f"ChromaDB add failed: {type(e).__name__}: {e}")
             import traceback
 
             traceback.print_exc()
