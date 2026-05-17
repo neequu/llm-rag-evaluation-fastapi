@@ -1,6 +1,4 @@
-import anyio
-
-
+# todo: add pdf handling
 def chunk_text(
     text: str,
     chunk_size: int = 1000,

@@ -1,23 +1,23 @@
 services:
-  app:
-    build: .
-    ports:
-      - "${APP_PORT:-8000}:8000"
-    env_file: .env.docker
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-    volumes:
-      - .:/app
-      - /app/.venv
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - REDIS_URL=${REDIS_URL}
-    restart: unless-stopped
+  # app:
+  #   build: .
+  #   ports:
+  #     - "${APP_PORT:-8000}:8000"
+  #   env_file: .env.docker
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #     minio:
+  #       condition: service_healthy
+  #   volumes:
+  #     - .:/app
+  #     - /app/.venv
+  #   environment:
+  #     - DATABASE_URL=${DATABASE_URL}
+  #     - REDIS_URL=${REDIS_URL}
+  #   restart: unless-stopped
 
   db:
     image: pgvector/pgvector:pg16
@@ -36,18 +36,18 @@ services:
       retries: ${DB_HEALTHCHECK_RETRIES:-5}
     restart: unless-stopped
 
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
-    volumes:
-      - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: ${REDIS_HEALTHCHECK_INTERVAL:-5s}
-      timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
-      retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
-    restart: unless-stopped
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "${REDIS_PORT:-6379}:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: ${REDIS_HEALTHCHECK_INTERVAL:-5s}
+  #     timeout: ${REDIS_HEALTHCHECK_TIMEOUT:-3s}
+  #     retries: ${REDIS_HEALTHCHECK_RETRIES:-5}
+  #   restart: unless-stopped
 
   minio:
     image: minio/minio:latest

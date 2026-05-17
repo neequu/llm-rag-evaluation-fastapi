@@ -32,7 +32,7 @@ async def retrieve(
     elif payload.strategy == StrategyName.BM25:
         results = await RetrievalService.bm25_search(
             db=db,
-            workspace_id=workspace_id,
+            workspace_id=str(workspace_id),
             query=payload.query,
             limit=payload.limit,
         )
@@ -40,7 +40,7 @@ async def retrieve(
     elif payload.strategy == StrategyName.HYBRID:
         results = await RetrievalService.hybrid_search(
             db=db,
-            workspace_id=workspace_id,
+            workspace_id=str(workspace_id),
             query=payload.query,
             limit=payload.limit,
         )

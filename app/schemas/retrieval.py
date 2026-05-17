@@ -21,7 +21,7 @@ class RetrievalResult(BaseModel):
     document_id: UUID
     content: str
     score: float
-    strategy: str
+    strategy: StrategyName
 
 
 class RetrievalResponse(BaseModel):

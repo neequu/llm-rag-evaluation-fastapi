@@ -1,152 +1,122 @@
-from sqlalchemy import func, select
+from sqlalchemy import select
 
 from app.models.document import Document
 from app.models.document_chunk import DocumentChunk
-from app.schemas.retrieval import RetrievalResult
+from app.services.bm25_service import BM25Service
 from app.services.chroma_service import chroma_service
 from app.services.embedding_service import generate_embeddings
+from app.services.hybrid_service import reciprocal_rank_fusion
+from app.services.reranker_service import RerankerService
 
 
 class RetrievalService:
     @staticmethod
     async def dense_search(
-        *,
         db,
         workspace_id: str,
         query: str,
         limit: int = 5,
-    ) -> list[RetrievalResult]:
+    ):
 
-        query_embedding = generate_embeddings([query])[0]
+        embedding = generate_embeddings([query])[0]
 
-        chroma_result = await chroma_service.query(
+        results = await chroma_service.query(
             workspace_id=workspace_id,
-            embedding=query_embedding,
+            embedding=embedding,
             limit=limit,
         )
 
-        ids = chroma_result["ids"][0]
-        documents = chroma_result["documents"][0]
-        metadatas = chroma_result["metadatas"][0]
-        distances = chroma_result["distances"][0]
+        print(results)
 
-        results = []
+        chunk_ids = results["ids"][0]
 
-        for chunk_id, content, metadata, distance in zip(
-            ids,
-            documents,
-            metadatas,
-            distances,
-            strict=False,
-        ):
-            db_query = select(DocumentChunk).where(DocumentChunk.chroma_id == chunk_id)
+        stmt = select(DocumentChunk).where(DocumentChunk.chroma_id.in_(chunk_ids))
 
-            db_result = await db.execute(db_query)
+        result = await db.execute(stmt)
 
-            chunk = db_result.scalar_one_or_none()
-
-            if chunk is None:
-                print(f"Warning: Chunk with chroma_id {chunk_id} not found in database")
-                continue
-
-            results.append(
-                RetrievalResult(
-                    chunk_id=chunk.id,
-                    document_id=chunk.document_id,
-                    content=content,
-                    score=float(distance),
-                    strategy="dense",
-                )
-            )
-
-        return results
+        return list(result.scalars())
 
     @staticmethod
     async def bm25_search(
-        *,
         db,
-        workspace_id,
+        workspace_id: str,
         query: str,
         limit: int = 5,
-    ) -> list[RetrievalResult]:
-
-        ts_query = func.plainto_tsquery("english", query)
-
-        rank = func.ts_rank_cd(
-            func.to_tsvector("english", DocumentChunk.content),
-            ts_query,
-        )
+    ):
 
         stmt = (
-            select(DocumentChunk, rank)
-            .join(Document)
-            .where(
-                Document.workspace_id == workspace_id,
-                func.to_tsvector(
-                    "english",
-                    DocumentChunk.content,
-                ).op("@@")(ts_query),
-            )
-            .order_by(rank.desc())
-            .limit(limit)
+            select(DocumentChunk)
+            .join(DocumentChunk.document)
+            .where(Document.workspace_id == workspace_id)
         )
 
         result = await db.execute(stmt)
 
-        rows = result.all()
+        chunks = list(result.scalars())
 
-        retrieval_results = []
+        bm25 = BM25Service.build_index(chunks)
 
-        for chunk, score in rows:
-            retrieval_results.append(
-                RetrievalResult(
-                    chunk_id=chunk.id,
-                    document_id=chunk.document_id,
-                    content=chunk.content,
-                    score=float(score),
-                    strategy="bm25",
-                )
-            )
+        ranked = BM25Service.search(
+            bm25=bm25,
+            chunks=chunks,
+            query=query,
+            limit=limit,
+        )
 
-        return retrieval_results
+        return [chunk for chunk, _score in ranked]
 
     @staticmethod
     async def hybrid_search(
-        *,
         db,
-        workspace_id,
+        workspace_id: str,
         query: str,
         limit: int = 5,
-    ) -> list[RetrievalResult]:
+    ):
 
-        dense_results = await RetrievalService.dense_search(
+        bm25_chunks = await RetrievalService.bm25_search(
             db=db,
             workspace_id=workspace_id,
             query=query,
-            limit=limit,
+            limit=20,
         )
 
-        bm25_results = await RetrievalService.bm25_search(
+        dense_chunks = await RetrievalService.dense_search(
             db=db,
             workspace_id=workspace_id,
             query=query,
-            limit=limit,
+            limit=20,
         )
 
-        merged = {}
+        bm25_ids = [str(chunk.id) for chunk in bm25_chunks]
 
-        for result in dense_results + bm25_results:
-            key = str(result.chunk_id)
+        dense_ids = [str(chunk.id) for chunk in dense_chunks]
 
-            if key not in merged:
-                merged[key] = result
-            else:
-                merged[key].score += result.score
-
-        ranked = sorted(
-            merged.values(),
-            key=lambda x: x.score,
-            reverse=True,
+        fused = reciprocal_rank_fusion(
+            [
+                bm25_ids,
+                dense_ids,
+            ]
         )
 
-        return ranked[:limit]
+        fused_ids = [doc_id for doc_id, _score in fused[:20]]
+
+        all_chunks = {str(chunk.id): chunk for chunk in (bm25_chunks + dense_chunks)}
+
+        rerank_candidates = [
+            all_chunks[doc_id] for doc_id in fused_ids if doc_id in all_chunks
+        ]
+
+        reranked = RerankerService.rerank(
+            query=query,
+            chunks=[chunk.content for chunk in rerank_candidates],
+        )
+
+        final_chunks = []
+
+        for content, _score in reranked[:limit]:
+            for chunk in rerank_candidates:
+                if chunk.content == content:
+                    final_chunks.append(chunk)
+                    break
+
+        return final_chunks
