@@ -18,7 +18,7 @@ class OllamaService:
                         "stream": False,
                         "options": {
                             "num_predict": 100,
-                            "temperature": 0.3,
+                            "temperature": 0.1,
                         },
                     },
                 )

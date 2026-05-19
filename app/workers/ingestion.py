@@ -1,13 +1,16 @@
 from uuid import UUID
 
+import tiktoken
+
 from app.core.s3 import s3_client
 from app.crud.documents import DocumentService
 from app.db.db import AsyncSessionLocal
 from app.models.document import DocumentState
 from app.models.document_chunk import DocumentChunk
 from app.services.chroma_service import chroma_service
-from app.services.chunking import chunk_text
+from app.services.chunking import chunk_text, count_tokens
 from app.services.embedding_service import generate_embeddings
+from app.services.markdown_cleaner import clean_markdown
 
 
 async def ingest_document(ctx, document_id: UUID):
@@ -26,7 +29,9 @@ async def ingest_document(ctx, document_id: UUID):
 
             file_bytes = await s3_client.download_file(document.s3_key)
             text = file_bytes.decode("utf-8")
-            chunks = chunk_text(text)
+
+            cleaned = clean_markdown(text)
+            chunks = chunk_text(cleaned)
             embeddings = generate_embeddings(chunks)
 
             db_chunks = []
@@ -36,7 +41,7 @@ async def ingest_document(ctx, document_id: UUID):
             for i, (chunk, embedding) in enumerate(
                 zip(chunks, embeddings, strict=False)
             ):
-                token_count = len(chunk.split())
+                token_count = count_tokens(chunk)
                 total_tokens += token_count
                 chroma_id = f"{document.id}_{i}"
 
@@ -68,20 +73,18 @@ async def ingest_document(ctx, document_id: UUID):
                     workspace_id=str(document.workspace_id),
                     chunks=chroma_chunks,
                 )
-                print(f"✅ Successfully added {len(chroma_chunks)} chunks to ChromaDB")
             except Exception as chroma_error:
-                print(f"❌ ChromaDB error: {chroma_error}")
-                # Roll back and re-raise
+                print(f"ChromaDB error: {chroma_error}")
                 await db.rollback()
-                raise Exception(f"ChromaDB ingestion failed: {chroma_error}")
+                raise Exception(
+                    f"ChromaDB ingestion failed: {chroma_error}"
+                ) from chroma_error
 
-            # ✅ Only add to PostgreSQL if ChromaDB succeeded
             db.add_all(db_chunks)
             document.chunk_count = len(chunks)
             document.token_count = total_tokens
 
             await db.commit()
-            print(f"✅ Successfully committed {len(db_chunks)} chunks to PostgreSQL")
 
             await DocumentService.update_status(
                 db=db,
@@ -90,7 +93,7 @@ async def ingest_document(ctx, document_id: UUID):
             )
 
         except Exception as e:
-            print(f"❌ Ingestion failed: {e}")
+            print(f"Ingestion failed: {e}")
             await DocumentService.update_status(
                 db=db,
                 document_id=document_id,
