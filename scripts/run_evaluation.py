@@ -46,7 +46,7 @@ async def run():
                     workspace_id=WORKSPACE_ID,
                     query=query,
                     strategy=strategy,
-                    limit=5,
+                    limit=3,
                 )
 
                 results.append(

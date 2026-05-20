@@ -14,7 +14,7 @@ class RAGService:
         workspace_id,
         query: str,
         strategy: str,
-        limit: int = 5,
+        limit: int = 3,
     ):
         retrieval_start = time.perf_counter()
 
@@ -47,22 +47,19 @@ class RAGService:
 
         retrieval_latency_ms = (time.perf_counter() - retrieval_start) * 1000
 
-        MAX_CHUNKS = 2
-        MAX_CHARS_PER_CHUNK = 400
-
         contexts = []
-        # contexts2 = []
 
-        for r in retrieval_results[:MAX_CHUNKS]:
-            content = r.content
-            if len(content) > MAX_CHARS_PER_CHUNK:
-                content = content[:MAX_CHARS_PER_CHUNK] + "..."
-            contexts.append(content)
-            # contexts2.append({"chunk_id": r.id, "content": content})
+        for r in retrieval_results:
+            contexts.append(
+                {
+                    "chunk_id": str(r.id),
+                    "content": r.content,
+                    "document_id": str(r.document_id),
+                }
+            )
 
         prompt = build_rag_prompt(
-            query=query,
-            contexts=contexts,
+            query=query, contexts=[c["content"] for c in contexts]
         )
 
         generation_start = time.perf_counter()
@@ -75,7 +72,6 @@ class RAGService:
         return {
             "answer": answer,
             "retrieved_chunks": contexts,
-            # "retrieved_chunks": contexts2,
             "retrieval_strategy": strategy,
             "generation_latency_ms": generation_latency_ms,
             "retrieval_latency_ms": retrieval_latency_ms,

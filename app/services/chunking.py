@@ -1,7 +1,6 @@
-# In chunking.py
 import tiktoken
 
-_encoding = tiktoken.get_encoding("cl100k_base")  # private, module-level singleton
+_encoding = tiktoken.get_encoding("cl100k_base")
 
 
 def chunk_text(

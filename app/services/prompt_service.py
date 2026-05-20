@@ -2,17 +2,16 @@ def build_rag_prompt(
     query: str,
     contexts: list[str],
 ) -> str:
-
     if not contexts:
         return "I could not find the answer in the provided documents."
 
     joined_context = "\n\n".join(contexts)
 
-    return f"""You are a helpful assistant. Answer using ONLY the provided context. If the answer is not present, say "I could not find the answer in the provided documents."
+    return f"""Answer the question based ONLY on the context below.
 
-    Context:
-    {joined_context}
+Context:
+{joined_context}
 
-    Question: {query}
+Question: {query}
 
-    Answer(be concise, 2-3 sentences maximum):"""
+Answer:"""
