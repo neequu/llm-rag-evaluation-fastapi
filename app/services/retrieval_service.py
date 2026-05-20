@@ -39,28 +39,24 @@ class RetrievalService:
         db,
         workspace_id: str,
         query: str,
-        limit: int = 5,
+        limit: int = 3,
     ):
-
         stmt = (
             select(DocumentChunk)
             .join(DocumentChunk.document)
             .where(Document.workspace_id == workspace_id)
         )
-
         result = await db.execute(stmt)
-
         chunks = list(result.scalars())
 
-        bm25 = BM25Service.build_index(chunks)
+        cached_chunks, bm25 = BM25Service.get_or_build_index(workspace_id, chunks)
 
         ranked = BM25Service.search(
             bm25=bm25,
-            chunks=chunks,
+            chunks=cached_chunks,
             query=query,
             limit=limit,
         )
-
         return [chunk for chunk, _score in ranked]
 
     @staticmethod
