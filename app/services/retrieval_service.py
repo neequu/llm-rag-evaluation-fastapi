@@ -15,7 +15,7 @@ class RetrievalService:
         db,
         workspace_id: str,
         query: str,
-        limit: int = 3,
+        limit: int = 5,
     ):
 
         embedding = generate_embeddings([query])[0]
@@ -39,7 +39,7 @@ class RetrievalService:
         db,
         workspace_id: str,
         query: str,
-        limit: int = 3,
+        limit: int = 5,
     ):
 
         stmt = (
@@ -68,7 +68,7 @@ class RetrievalService:
         db,
         workspace_id: str,
         query: str,
-        limit: int = 3,
+        limit: int = 5,
     ):
 
         bm25_chunks = await RetrievalService.bm25_search(

@@ -13,7 +13,7 @@ class StrategyName(StrEnum):
 class RetrievalRequest(BaseModel):
     query: str
     strategy: StrategyName = StrategyName.DENSE
-    limit: int = 3
+    limit: int = 5
 
 
 class RetrievalResult(BaseModel):

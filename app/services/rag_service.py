@@ -14,7 +14,7 @@ class RAGService:
         workspace_id,
         query: str,
         strategy: str,
-        limit: int = 3,
+        limit: int = 5,
     ):
         retrieval_start = time.perf_counter()
 

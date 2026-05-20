@@ -21,7 +21,7 @@ class BM25Service:
         bm25: BM25Okapi,
         chunks: list[DocumentChunk],
         query: str,
-        limit: int = 3,
+        limit: int = 5,
     ):
         tokenized_query = BM25Service.tokenize(query)
 

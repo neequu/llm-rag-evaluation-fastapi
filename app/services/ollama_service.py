@@ -17,7 +17,7 @@ class OllamaService:
                         "prompt": prompt,
                         "stream": False,
                         "options": {
-                            "num_predict": 100,
+                            "num_predict": 256,
                             "temperature": 0.1,
                         },
                     },
