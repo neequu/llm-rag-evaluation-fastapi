@@ -1,23 +1,23 @@
 services:
-  # app:
-  #   build: .
-  #   ports:
-  #     - "${APP_PORT:-8000}:8000"
-  #   env_file: .env.docker
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #     redis:
-  #       condition: service_healthy
-  #     minio:
-  #       condition: service_healthy
-  #   volumes:
-  #     - .:/app
-  #     - /app/.venv
-  #   environment:
-  #     - DATABASE_URL=${DATABASE_URL}
-  #     - REDIS_URL=${REDIS_URL}
-  #   restart: unless-stopped
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    env_file: .env.docker
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/.venv
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+    restart: unless-stopped
 
   db:
     image: pgvector/pgvector:pg16

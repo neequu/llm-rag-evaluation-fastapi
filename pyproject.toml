@@ -1,7 +1,7 @@
 [project]
-name = "fastapi-app"
+name = "llm-rag-evaluation"
 version = "0.1.0"
-description = "Add your description here"
+description = "Evaluation of different RAG strategies"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -28,7 +28,6 @@ dependencies = [
     "datasets>=4.8.5",
     "pandas>=3.0.3",
     "tiktoken>=0.13.0",
-    "beautifulsoup4>=4.14.3",
     "matplotlib>=3.10.9",
 ]
 

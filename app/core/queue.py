@@ -1,5 +1,6 @@
 from arq import create_pool
 from arq.connections import RedisSettings
+from core.config import settings
 
 redis = None
 
@@ -10,8 +11,8 @@ async def get_redis():
     if redis is None:
         redis = await create_pool(
             RedisSettings(
-                host="localhost",
-                port=6379,
+                host=settings.REDIS_HOST,
+                port=settings.REDIS_PORT,
             )
         )
 

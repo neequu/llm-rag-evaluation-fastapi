@@ -89,7 +89,6 @@ class Settings(BaseSettings):
     CHROMA_PORT: int = 8002
 
     OLLAMA_URL: str = "http://localhost:11434"
-    # OLLAMA_MODEL: str = "llama3"
     OLLAMA_MODEL: str = "phi4-mini"
 
 
