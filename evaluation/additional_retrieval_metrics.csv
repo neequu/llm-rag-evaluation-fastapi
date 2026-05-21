@@ -1,0 +1,247 @@
+strategy,query,question_type,hit_at_k,reciprocal_rank
+bm25,What is the most popular Python framework that is used to build systems like Instagram?,factual,0,0.0
+bm25,"Who created Django REST Framework, Starlette, and Uvicorn?",factual,0,0.0
+bm25,What are the two web user interfaces for API documentation that FastAPI integrates based on the OpenAPI standard?,factual,0,0.0
+bm25,What status code range should I use for errors caused by the client?,factual,0,0.0
+bm25,Can I add custom headers to an HTTP error response?,factual,0,0.0
+bm25,How do I create a custom exception handler for my own exception type?,procedural,0,0.0
+bm25,What exception does FastAPI raise internally when a request contains invalid data?,factual,0,0.0
+bm25,What is the difference between FastAPI's HTTPException and Starlette's HTTPException?,conceptual,0,0.0
+bm25,"When I register an exception handler, should I register it for FastAPI's HTTPException or Starlette's HTTPException?",procedural,0,0.0
+bm25,Does the RequestValidationError contain the invalid data that the client sent?,factual,0,0.0
+bm25,What is the main job of a data serialization library like Marshmallow in an API?,conceptual,0,0.0
+bm25,"Which framework inspired FastAPI to get crazy performance, and why?",conceptual,0,0.0
+bm25,What is the recommended server to run a FastAPI application?,factual,0,0.0
+bm25,What basic features does Starlette provide that FastAPI builds on top of?,factual,0,0.0
+bm25,How do I run the live server for my FastAPI app?,procedural,0,0.0
+bm25,"After I start the server, what URL should I open in my browser to see the JSON response?",procedural,0,0.0
+bm25,Where can I find the automatic interactive API documentation provided by Swagger UI?,procedural,0,0.0
+bm25,What is OpenAPI?,conceptual,0,0.0
+bm25,Does FastAPI automatically generate a raw JSON schema of my API?,factual,0,0.0
+bm25,"What are the steps to create a basic FastAPI application, from importing to deploying?",procedural,0,0.0
+bm25,Can I use a normal function instead of an 'async def' function for my path operation?,factual,0,0.0
+bm25,How does FastAPI know if a function parameter is a query parameter and not a path parameter?,conceptual,0,0.0
+bm25,What are query parameters in a URL? Can you give me an example?,factual,0,0.0
+bm25,"If I declare a query parameter with a default value, is it required or optional?",factual,0,0.0
+bm25,How do I make a query parameter optional?,procedural,0,0.0
+bm25,Can FastAPI automatically convert query parameter values from strings to other types like integers or booleans?,factual,0,0.0
+bm25,What values can I pass in the URL to make a boolean query parameter become True?,procedural,0,0.0
+bm25,How do I make a query parameter required (not optional)?,procedural,0,0.0
+bm25,What happens if I don't provide a required query parameter in the URL?,factual,0,0.0
+bm25,What is a request body? When do I need to send one?,conceptual,0,0.0
+bm25,"How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",procedural,1,0.5
+bm25,Can I use a try block inside a dependency that uses yield?,factual,1,1.0
+bm25,"If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",factual,1,0.3333333333333333
+bm25,What happens if I catch an exception in a dependency with yield but don't re-raise it?,conceptual,1,1.0
+bm25,What is the recommended way to handle exceptions caught in a dependency with yield?,procedural,0,0.0
+bm25,What are the two possible scope values I can use with Depends() for a dependency that uses yield?,factual,1,1.0
+bm25,What is a context manager in Python?,conceptual,1,0.5
+bm25,Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?,factual,1,1.0
+bm25,What does JWT stand for and what does a JWT token look like?,factual,0,0.0
+bm25,"If I store a JWT token, is the information inside it encrypted?",conceptual,1,1.0
+bm25,What Python package do I need to install to generate and verify JWT tokens?,procedural,1,1.0
+bm25,What is password hashing and why should I use it?,conceptual,1,1.0
+bm25,"What Python package does FastAPI recommend for password hashing, and what is the recommended algorithm?",factual,1,1.0
+bm25,How do I generate a secure random secret key for signing JWT tokens?,procedural,1,1.0
+bm25,Why does the authenticate_user function run verify_password against a dummy hash when the username doesn't exist in the database?,conceptual,1,1.0
+bm25,What is the 'sub' key in a JWT token used for?,factual,1,0.5
+bm25,Does FastAPI force me to use a specific database?,factual,0,0.0
+bm25,What is SQLModel and why would I use it with FastAPI?,factual,0,0.0
+bm25,How do I install SQLModel?,procedural,0,0.0
+bm25,What is the difference between a table model and a data model in SQLModel?,conceptual,0,0.0
+bm25,Why should I use separate models for creating data and returning data in my API?,conceptual,0,0.0
+bm25,"What is the purpose of a Session in SQLModel, and how should I manage it per request?",procedural,1,1.0
+bm25,"What SQL database does the example use, and why?",factual,1,1.0
+bm25,"How do I update only the fields that a client sends, instead of replacing the entire record?",procedural,0,0.0
+bm25,What is a middleware in FastAPI?,conceptual,1,0.5
+bm25,How do I create a middleware in FastAPI?,procedural,1,0.3333333333333333
+bm25,When do dependencies with yield and background tasks run compared to middleware?,factual,0,0.0
+bm25,How can I add a custom header to measure request processing time?,procedural,1,0.3333333333333333
+bm25,"If I add multiple middlewares, what order do they execute in?",conceptual,0,0.0
+bm25,"If I want browser clients to see my custom header, what do I need to configure?",procedural,0,0.0
+bm25,When should I use async def vs normal def for my path operation functions?,procedural,0,0.0
+bm25,Can I mix def and async def in my path operation functions?,factual,1,1.0
+bm25,What does asynchronous code mean?,conceptual,0,0.0
+bm25,What is a coroutine?,factual,0,0.0
+bm25,"If I declare a path operation function with normal def instead of async def, how does FastAPI run it?",conceptual,0,0.0
+bm25,What is AnyIO and how does FastAPI use it?,factual,0,0.0
+bm25,Why is FastAPI a good match for Machine Learning web APIs?,conceptual,1,1.0
+dense,What is the most popular Python framework that is used to build systems like Instagram?,factual,0,0.0
+dense,"Who created Django REST Framework, Starlette, and Uvicorn?",factual,0,0.0
+dense,What are the two web user interfaces for API documentation that FastAPI integrates based on the OpenAPI standard?,factual,0,0.0
+dense,What status code range should I use for errors caused by the client?,factual,0,0.0
+dense,Can I add custom headers to an HTTP error response?,factual,0,0.0
+dense,How do I create a custom exception handler for my own exception type?,procedural,0,0.0
+dense,What exception does FastAPI raise internally when a request contains invalid data?,factual,0,0.0
+dense,What is the difference between FastAPI's HTTPException and Starlette's HTTPException?,conceptual,0,0.0
+dense,"When I register an exception handler, should I register it for FastAPI's HTTPException or Starlette's HTTPException?",procedural,0,0.0
+dense,Does the RequestValidationError contain the invalid data that the client sent?,factual,0,0.0
+dense,What is the main job of a data serialization library like Marshmallow in an API?,conceptual,0,0.0
+dense,"Which framework inspired FastAPI to get crazy performance, and why?",conceptual,0,0.0
+dense,What is the recommended server to run a FastAPI application?,factual,0,0.0
+dense,What basic features does Starlette provide that FastAPI builds on top of?,factual,0,0.0
+dense,How do I run the live server for my FastAPI app?,procedural,0,0.0
+dense,"After I start the server, what URL should I open in my browser to see the JSON response?",procedural,0,0.0
+dense,Where can I find the automatic interactive API documentation provided by Swagger UI?,procedural,0,0.0
+dense,What is OpenAPI?,conceptual,0,0.0
+dense,Does FastAPI automatically generate a raw JSON schema of my API?,factual,0,0.0
+dense,"What are the steps to create a basic FastAPI application, from importing to deploying?",procedural,0,0.0
+dense,Can I use a normal function instead of an 'async def' function for my path operation?,factual,0,0.0
+dense,How does FastAPI know if a function parameter is a query parameter and not a path parameter?,conceptual,0,0.0
+dense,What are query parameters in a URL? Can you give me an example?,factual,0,0.0
+dense,"If I declare a query parameter with a default value, is it required or optional?",factual,0,0.0
+dense,How do I make a query parameter optional?,procedural,0,0.0
+dense,Can FastAPI automatically convert query parameter values from strings to other types like integers or booleans?,factual,0,0.0
+dense,What values can I pass in the URL to make a boolean query parameter become True?,procedural,0,0.0
+dense,How do I make a query parameter required (not optional)?,procedural,0,0.0
+dense,What happens if I don't provide a required query parameter in the URL?,factual,0,0.0
+dense,What is a request body? When do I need to send one?,conceptual,0,0.0
+dense,"How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",procedural,0,0.0
+dense,Can I use a try block inside a dependency that uses yield?,factual,1,0.5
+dense,"If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",factual,1,1.0
+dense,What happens if I catch an exception in a dependency with yield but don't re-raise it?,conceptual,1,0.5
+dense,What is the recommended way to handle exceptions caught in a dependency with yield?,procedural,1,0.5
+dense,What are the two possible scope values I can use with Depends() for a dependency that uses yield?,factual,1,0.3333333333333333
+dense,What is a context manager in Python?,conceptual,0,0.0
+dense,Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?,factual,1,0.3333333333333333
+dense,What does JWT stand for and what does a JWT token look like?,factual,1,1.0
+dense,"If I store a JWT token, is the information inside it encrypted?",conceptual,1,1.0
+dense,What Python package do I need to install to generate and verify JWT tokens?,procedural,0,0.0
+dense,What is password hashing and why should I use it?,conceptual,1,1.0
+dense,"What Python package does FastAPI recommend for password hashing, and what is the recommended algorithm?",factual,0,0.0
+dense,How do I generate a secure random secret key for signing JWT tokens?,procedural,0,0.0
+dense,Why does the authenticate_user function run verify_password against a dummy hash when the username doesn't exist in the database?,conceptual,1,1.0
+dense,What is the 'sub' key in a JWT token used for?,factual,1,0.5
+dense,Does FastAPI force me to use a specific database?,factual,1,0.3333333333333333
+dense,What is SQLModel and why would I use it with FastAPI?,factual,1,0.5
+dense,How do I install SQLModel?,procedural,1,0.3333333333333333
+dense,What is the difference between a table model and a data model in SQLModel?,conceptual,0,0.0
+dense,Why should I use separate models for creating data and returning data in my API?,conceptual,1,0.3333333333333333
+dense,"What is the purpose of a Session in SQLModel, and how should I manage it per request?",procedural,1,0.3333333333333333
+dense,"What SQL database does the example use, and why?",factual,1,0.5
+dense,"How do I update only the fields that a client sends, instead of replacing the entire record?",procedural,0,0.0
+dense,What is a middleware in FastAPI?,conceptual,1,0.3333333333333333
+dense,How do I create a middleware in FastAPI?,procedural,0,0.0
+dense,When do dependencies with yield and background tasks run compared to middleware?,factual,1,0.3333333333333333
+dense,How can I add a custom header to measure request processing time?,procedural,1,0.3333333333333333
+dense,"If I add multiple middlewares, what order do they execute in?",conceptual,1,0.3333333333333333
+dense,"If I want browser clients to see my custom header, what do I need to configure?",procedural,0,0.0
+dense,When should I use async def vs normal def for my path operation functions?,procedural,1,1.0
+dense,Can I mix def and async def in my path operation functions?,factual,1,1.0
+dense,What does asynchronous code mean?,conceptual,1,1.0
+dense,What is a coroutine?,factual,0,0.0
+dense,"If I declare a path operation function with normal def instead of async def, how does FastAPI run it?",conceptual,0,0.0
+dense,What is AnyIO and how does FastAPI use it?,factual,0,0.0
+dense,Why is FastAPI a good match for Machine Learning web APIs?,conceptual,0,0.0
+hybrid,What is the most popular Python framework that is used to build systems like Instagram?,factual,0,0.0
+hybrid,"Who created Django REST Framework, Starlette, and Uvicorn?",factual,0,0.0
+hybrid,What are the two web user interfaces for API documentation that FastAPI integrates based on the OpenAPI standard?,factual,0,0.0
+hybrid,What status code range should I use for errors caused by the client?,factual,0,0.0
+hybrid,Can I add custom headers to an HTTP error response?,factual,0,0.0
+hybrid,How do I create a custom exception handler for my own exception type?,procedural,0,0.0
+hybrid,What exception does FastAPI raise internally when a request contains invalid data?,factual,0,0.0
+hybrid,What is the difference between FastAPI's HTTPException and Starlette's HTTPException?,conceptual,0,0.0
+hybrid,"When I register an exception handler, should I register it for FastAPI's HTTPException or Starlette's HTTPException?",procedural,0,0.0
+hybrid,Does the RequestValidationError contain the invalid data that the client sent?,factual,0,0.0
+hybrid,What is the main job of a data serialization library like Marshmallow in an API?,conceptual,0,0.0
+hybrid,"Which framework inspired FastAPI to get crazy performance, and why?",conceptual,0,0.0
+hybrid,What is the recommended server to run a FastAPI application?,factual,0,0.0
+hybrid,What basic features does Starlette provide that FastAPI builds on top of?,factual,0,0.0
+hybrid,How do I run the live server for my FastAPI app?,procedural,0,0.0
+hybrid,"After I start the server, what URL should I open in my browser to see the JSON response?",procedural,0,0.0
+hybrid,Where can I find the automatic interactive API documentation provided by Swagger UI?,procedural,0,0.0
+hybrid,What is OpenAPI?,conceptual,0,0.0
+hybrid,Does FastAPI automatically generate a raw JSON schema of my API?,factual,0,0.0
+hybrid,"What are the steps to create a basic FastAPI application, from importing to deploying?",procedural,0,0.0
+hybrid,Can I use a normal function instead of an 'async def' function for my path operation?,factual,0,0.0
+hybrid,How does FastAPI know if a function parameter is a query parameter and not a path parameter?,conceptual,0,0.0
+hybrid,What are query parameters in a URL? Can you give me an example?,factual,0,0.0
+hybrid,"If I declare a query parameter with a default value, is it required or optional?",factual,0,0.0
+hybrid,How do I make a query parameter optional?,procedural,0,0.0
+hybrid,Can FastAPI automatically convert query parameter values from strings to other types like integers or booleans?,factual,0,0.0
+hybrid,What values can I pass in the URL to make a boolean query parameter become True?,procedural,0,0.0
+hybrid,How do I make a query parameter required (not optional)?,procedural,0,0.0
+hybrid,What happens if I don't provide a required query parameter in the URL?,factual,0,0.0
+hybrid,What is a request body? When do I need to send one?,conceptual,0,0.0
+bm25,Can I send a body with a GET request?,factual,0,0.0
+bm25,How do I create a data model for a request body in FastAPI?,procedural,0,0.0
+bm25,"If I set a model attribute's default value to None, is it required or optional?",factual,0,0.0
+bm25,What happens if the client sends invalid data in the request body?,factual,0,0.0
+bm25,Can I declare path parameters and a request body in the same path operation?,factual,0,0.0
+bm25,"How does FastAPI know whether a function parameter is a path parameter, a query parameter, or a request body?",conceptual,0,0.0
+bm25,Do I have to use Pydantic models for request bodies?,factual,0,0.0
+bm25,What is the difference between using a return type annotation and using the response_model parameter?,conceptual,0,0.0
+bm25,"If I declare both a return type and a response_model, which one does FastAPI use?",factual,0,0.0
+bm25,I want to create a user but I don't want to send back the plaintext password in the response. How can I do that?,procedural,0,0.0
+bm25,How can I omit default values from my response JSON if they weren't actually stored?,procedural,0,0.0
+bm25,"If a field has the same value as its default but was explicitly set by the user, will FastAPI include it in the response when I use response_model_exclude_unset=True?",factual,0,0.0
+bm25,What is the recommended way to remove some attributes from the output instead of using response_model_include or response_model_exclude?,conceptual,0,0.0
+bm25,Can I disable the response model generation completely?,factual,0,0.0
+bm25,How do I return a 404 error when an item doesn't exist in my FastAPI application?,procedural,0,0.0
+dense,Can I send a body with a GET request?,factual,0,0.0
+dense,How do I create a data model for a request body in FastAPI?,procedural,0,0.0
+dense,"If I set a model attribute's default value to None, is it required or optional?",factual,0,0.0
+dense,What happens if the client sends invalid data in the request body?,factual,0,0.0
+dense,Can I declare path parameters and a request body in the same path operation?,factual,0,0.0
+dense,"How does FastAPI know whether a function parameter is a path parameter, a query parameter, or a request body?",conceptual,0,0.0
+dense,Do I have to use Pydantic models for request bodies?,factual,0,0.0
+dense,What is the difference between using a return type annotation and using the response_model parameter?,conceptual,0,0.0
+dense,"If I declare both a return type and a response_model, which one does FastAPI use?",factual,0,0.0
+dense,I want to create a user but I don't want to send back the plaintext password in the response. How can I do that?,procedural,0,0.0
+dense,How can I omit default values from my response JSON if they weren't actually stored?,procedural,0,0.0
+dense,"If a field has the same value as its default but was explicitly set by the user, will FastAPI include it in the response when I use response_model_exclude_unset=True?",factual,0,0.0
+dense,What is the recommended way to remove some attributes from the output instead of using response_model_include or response_model_exclude?,conceptual,0,0.0
+dense,Can I disable the response model generation completely?,factual,0,0.0
+dense,How do I return a 404 error when an item doesn't exist in my FastAPI application?,procedural,0,0.0
+hybrid,Can I send a body with a GET request?,factual,0,0.0
+hybrid,How do I create a data model for a request body in FastAPI?,procedural,0,0.0
+hybrid,"If I set a model attribute's default value to None, is it required or optional?",factual,0,0.0
+hybrid,What happens if the client sends invalid data in the request body?,factual,0,0.0
+hybrid,Can I declare path parameters and a request body in the same path operation?,factual,0,0.0
+hybrid,"How does FastAPI know whether a function parameter is a path parameter, a query parameter, or a request body?",conceptual,0,0.0
+hybrid,Do I have to use Pydantic models for request bodies?,factual,0,0.0
+hybrid,What is the difference between using a return type annotation and using the response_model parameter?,conceptual,0,0.0
+hybrid,"If I declare both a return type and a response_model, which one does FastAPI use?",factual,0,0.0
+hybrid,I want to create a user but I don't want to send back the plaintext password in the response. How can I do that?,procedural,0,0.0
+hybrid,How can I omit default values from my response JSON if they weren't actually stored?,procedural,0,0.0
+hybrid,"If a field has the same value as its default but was explicitly set by the user, will FastAPI include it in the response when I use response_model_exclude_unset=True?",factual,0,0.0
+hybrid,What is the recommended way to remove some attributes from the output instead of using response_model_include or response_model_exclude?,conceptual,0,0.0
+hybrid,Can I disable the response model generation completely?,factual,0,0.0
+hybrid,How do I return a 404 error when an item doesn't exist in my FastAPI application?,procedural,0,0.0
+hybrid,"How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",procedural,1,0.5
+hybrid,Can I use a try block inside a dependency that uses yield?,factual,1,1.0
+hybrid,"If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",factual,1,1.0
+hybrid,What happens if I catch an exception in a dependency with yield but don't re-raise it?,conceptual,1,0.5
+hybrid,What is the recommended way to handle exceptions caught in a dependency with yield?,procedural,1,0.5
+hybrid,What are the two possible scope values I can use with Depends() for a dependency that uses yield?,factual,1,1.0
+hybrid,What is a context manager in Python?,conceptual,0,0.0
+hybrid,Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?,factual,1,1.0
+hybrid,What does JWT stand for and what does a JWT token look like?,factual,1,1.0
+hybrid,"If I store a JWT token, is the information inside it encrypted?",conceptual,1,1.0
+hybrid,What Python package do I need to install to generate and verify JWT tokens?,procedural,1,1.0
+hybrid,What is password hashing and why should I use it?,conceptual,1,0.5
+hybrid,"What Python package does FastAPI recommend for password hashing, and what is the recommended algorithm?",factual,1,1.0
+hybrid,How do I generate a secure random secret key for signing JWT tokens?,procedural,1,1.0
+hybrid,Why does the authenticate_user function run verify_password against a dummy hash when the username doesn't exist in the database?,conceptual,1,1.0
+hybrid,What is the 'sub' key in a JWT token used for?,factual,1,1.0
+hybrid,Does FastAPI force me to use a specific database?,factual,1,1.0
+hybrid,What is SQLModel and why would I use it with FastAPI?,factual,1,1.0
+hybrid,How do I install SQLModel?,procedural,0,0.0
+hybrid,What is the difference between a table model and a data model in SQLModel?,conceptual,0,0.0
+hybrid,Why should I use separate models for creating data and returning data in my API?,conceptual,0,0.0
+hybrid,"What is the purpose of a Session in SQLModel, and how should I manage it per request?",procedural,1,1.0
+hybrid,"What SQL database does the example use, and why?",factual,1,1.0
+hybrid,"How do I update only the fields that a client sends, instead of replacing the entire record?",procedural,0,0.0
+hybrid,What is a middleware in FastAPI?,conceptual,1,0.5
+hybrid,How do I create a middleware in FastAPI?,procedural,1,1.0
+hybrid,When do dependencies with yield and background tasks run compared to middleware?,factual,1,0.5
+hybrid,How can I add a custom header to measure request processing time?,procedural,1,1.0
+hybrid,"If I add multiple middlewares, what order do they execute in?",conceptual,1,1.0
+hybrid,"If I want browser clients to see my custom header, what do I need to configure?",procedural,0,0.0
+hybrid,When should I use async def vs normal def for my path operation functions?,procedural,1,1.0
+hybrid,Can I mix def and async def in my path operation functions?,factual,1,1.0
+hybrid,What does asynchronous code mean?,conceptual,1,0.5
+hybrid,What is a coroutine?,factual,0,0.0
+hybrid,"If I declare a path operation function with normal def instead of async def, how does FastAPI run it?",conceptual,0,0.0
+hybrid,What is AnyIO and how does FastAPI use it?,factual,0,0.0
+hybrid,Why is FastAPI a good match for Machine Learning web APIs?,conceptual,1,1.0

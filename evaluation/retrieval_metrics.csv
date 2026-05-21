@@ -1,0 +1,247 @@
+strategy,query,question_type,precision_at_k,recall_at_k,k,retrieval_latency_ms,generation_latency_ms,total_latency_ms,answer_length_chars,answer_length_words
+bm25,What is the most popular Python framework that is used to build systems like Instagram?,factual,,,3,537.119899992831,253877.27459997404,254414.39449996687,6,1
+bm25,"Who created Django REST Framework, Starlette, and Uvicorn?",factual,,,3,577.3045999812894,97142.37830002094,97719.68290000223,12,2
+bm25,What are the two web user interfaces for API documentation that FastAPI integrates based on the OpenAPI standard?,factual,,,3,74.26110003143549,97265.51070000278,97339.77180003421,21,4
+bm25,What status code range should I use for errors caused by the client?,factual,,,3,82.82840001629665,111271.67669998016,111354.50509999646,9,3
+bm25,Can I add custom headers to an HTTP error response?,factual,,,3,258.1173999933526,121593.50759995868,121851.62499995204,545,76
+bm25,How do I create a custom exception handler for my own exception type?,procedural,,,3,63.33999999333173,105718.44769996824,105781.78769996157,1161,153
+bm25,What exception does FastAPI raise internally when a request contains invalid data?,factual,,,3,68.5436999774538,116403.5405999748,116472.08429995226,89,11
+bm25,What is the difference between FastAPI's HTTPException and Starlette's HTTPException?,conceptual,,,3,53.82339999778196,105573.55480000842,105627.3782000062,423,56
+bm25,"When I register an exception handler, should I register it for FastAPI's HTTPException or Starlette's HTTPException?",procedural,,,3,52.9435999924317,63998.47180000506,64051.415399997495,144,20
+bm25,Does the RequestValidationError contain the invalid data that the client sent?,factual,,,3,48.44499996397644,105182.18100001104,105230.62599997502,210,31
+bm25,What is the main job of a data serialization library like Marshmallow in an API?,conceptual,,,3,428.65670000901446,158993.06420001085,159421.72090001986,73,10
+bm25,"Which framework inspired FastAPI to get crazy performance, and why?",conceptual,,,3,179.77729998528957,128282.33670000918,128462.11399999447,343,50
+bm25,What is the recommended server to run a FastAPI application?,factual,,,3,45.0944000040181,102367.70530001377,102412.79970001779,8,1
+bm25,What basic features does Starlette provide that FastAPI builds on top of?,factual,,,3,75.56579998345114,113116.83870002162,113192.40450000507,354,44
+bm25,How do I run the live server for my FastAPI app?,procedural,,,3,45.45440000947565,97548.18949999753,97593.64390000701,48,8
+bm25,"After I start the server, what URL should I open in my browser to see the JSON response?",procedural,,,3,95.2763999812305,129378.07259999681,129473.34899997804,1136,162
+bm25,Where can I find the automatic interactive API documentation provided by Swagger UI?,procedural,,,3,43.87300001690164,110605.26000001119,110649.13300002809,26,1
+bm25,What is OpenAPI?,conceptual,,,3,43.03420000360347,125566.24639997608,125609.28059997968,585,90
+bm25,Does FastAPI automatically generate a raw JSON schema of my API?,factual,,,3,38.90819998923689,116473.04909999366,116511.9572999829,195,26
+bm25,"What are the steps to create a basic FastAPI application, from importing to deploying?",procedural,,,3,38.05179998744279,136108.9794000145,136147.03120000195,668,98
+bm25,Can I use a normal function instead of an 'async def' function for my path operation?,factual,,,3,41.82620000210591,90209.90819999133,90251.73439999344,332,55
+bm25,How does FastAPI know if a function parameter is a query parameter and not a path parameter?,conceptual,,,3,44.697700010146946,123796.7828999972,123841.48060000734,796,134
+bm25,What are query parameters in a URL? Can you give me an example?,factual,,,3,44.835400010924786,117122.78229999356,117167.61770000448,352,54
+bm25,"If I declare a query parameter with a default value, is it required or optional?",factual,,,3,42.61050000786781,151487.49399997178,151530.10449997964,1311,208
+bm25,How do I make a query parameter optional?,procedural,,,3,36.4224000077229,111316.37009998667,111352.7924999944,75,16
+bm25,Can FastAPI automatically convert query parameter values from strings to other types like integers or booleans?,factual,,,3,42.50609999871813,114744.38230000669,114786.88840000541,268,43
+bm25,What values can I pass in the URL to make a boolean query parameter become True?,procedural,,,3,27.73979998892173,126020.9188000008,126048.65859998972,462,65
+bm25,How do I make a query parameter required (not optional)?,procedural,,,3,41.210199997294694,145673.1417000119,145714.3519000092,964,158
+bm25,What happens if I don't provide a required query parameter in the URL?,factual,,,3,36.43229999579489,109987.19970000093,110023.63199999672,60,9
+bm25,What is a request body? When do I need to send one?,conceptual,,,3,41.86980001395568,115807.57059997995,115849.44039999391,256,46
+bm25,"How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",procedural,0.3333333333333333,1.0,3,253.96320002619177,198752.9720000457,199006.9352000719,745,107
+bm25,Can I use a try block inside a dependency that uses yield?,factual,0.6666666666666666,1.0,3,171.5960000292398,175707.07820000825,175878.6742000375,1396,215
+bm25,"If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",factual,0.3333333333333333,0.5,3,86.40500000910833,127230.7518000016,127317.1568000107,122,17
+bm25,What happens if I catch an exception in a dependency with yield but don't re-raise it?,conceptual,0.6666666666666666,1.0,3,70.89859998086467,120540.10800004471,120611.00660002558,54,10
+bm25,What is the recommended way to handle exceptions caught in a dependency with yield?,procedural,0.0,0.0,3,277.4656999972649,130367.21779999789,130644.68349999515,341,54
+bm25,What are the two possible scope values I can use with Depends() for a dependency that uses yield?,factual,0.3333333333333333,1.0,3,103.38709998177364,117722.28579997318,117825.67289995495,21,2
+bm25,What is a context manager in Python?,conceptual,0.3333333333333333,1.0,3,43.48319995915517,100898.25040003052,100941.73359998967,921,129
+bm25,Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?,factual,0.6666666666666666,1.0,3,50.1833000453189,83059.91290003294,83110.09620007826,357,50
+bm25,What does JWT stand for and what does a JWT token look like?,factual,0.0,0.0,3,41.23859998071566,92580.4383000359,92621.67690001661,231,29
+bm25,"If I store a JWT token, is the information inside it encrypted?",conceptual,0.3333333333333333,1.0,3,54.47689996799454,115906.60350001417,115961.08039998217,242,40
+bm25,What Python package do I need to install to generate and verify JWT tokens?,procedural,0.3333333333333333,1.0,3,38.08780002873391,79675.93359999591,79714.02140002465,5,1
+bm25,What is password hashing and why should I use it?,conceptual,0.3333333333333333,0.5,3,28.478400025051087,117489.4048999995,117517.88330002455,435,67
+bm25,"What Python package does FastAPI recommend for password hashing, and what is the recommended algorithm?",factual,0.3333333333333333,1.0,3,26.985100004822016,79192.76659999741,79219.75170000223,88,12
+bm25,How do I generate a secure random secret key for signing JWT tokens?,procedural,0.3333333333333333,1.0,3,24.375899985898286,110751.80219998583,110776.17809997173,161,18
+bm25,Why does the authenticate_user function run verify_password against a dummy hash when the username doesn't exist in the database?,conceptual,0.6666666666666666,1.0,3,27.29260001797229,78255.0929999561,78282.38559997408,77,12
+bm25,What is the 'sub' key in a JWT token used for?,factual,0.3333333333333333,1.0,3,23.38859997689724,86485.93359999359,86509.32219997048,358,52
+bm25,Does FastAPI force me to use a specific database?,factual,0.0,0.0,3,25.596499966923147,89369.79749996681,89395.39399993373,54,10
+bm25,What is SQLModel and why would I use it with FastAPI?,factual,0.0,0.0,3,24.858799995854497,145865.58540002443,145890.44420002028,1450,203
+bm25,How do I install SQLModel?,procedural,0.0,0.0,3,25.861100002657622,106274.61050002603,106300.47160002869,54,10
+bm25,What is the difference between a table model and a data model in SQLModel?,conceptual,0.0,0.0,3,28.612199996132404,109220.63190001063,109249.24410000676,54,10
+bm25,Why should I use separate models for creating data and returning data in my API?,conceptual,0.0,0.0,3,28.569400019478053,99898.42520002276,99926.99460004224,454,65
+bm25,"What is the purpose of a Session in SQLModel, and how should I manage it per request?",procedural,0.3333333333333333,0.5,3,27.278700028546154,120281.15049999906,120308.4292000276,478,73
+bm25,"What SQL database does the example use, and why?",factual,0.3333333333333333,1.0,3,43.40550000779331,112587.56240003277,112630.96790004056,189,31
+bm25,"How do I update only the fields that a client sends, instead of replacing the entire record?",procedural,0.0,0.0,3,26.093500026036054,134249.63299999945,134275.72650002548,927,140
+bm25,What is a middleware in FastAPI?,conceptual,0.3333333333333333,1.0,3,21.28330001141876,96625.79679995542,96647.08009996684,333,49
+bm25,How do I create a middleware in FastAPI?,procedural,0.3333333333333333,1.0,3,22.357899986673146,156555.44929997995,156577.80719996663,1291,179
+bm25,When do dependencies with yield and background tasks run compared to middleware?,factual,0.0,0.0,3,54.58519997773692,105876.98010000167,105931.56529997941,508,82
+bm25,How can I add a custom header to measure request processing time?,procedural,0.3333333333333333,0.5,3,26.456699997652322,87306.0197000159,87332.47640001355,354,49
+bm25,"If I add multiple middlewares, what order do they execute in?",conceptual,0.0,0.0,3,27.11779996752739,109913.95979997469,109941.07759994222,269,40
+bm25,"If I want browser clients to see my custom header, what do I need to configure?",procedural,0.0,0.0,3,26.79169998737052,101145.70079999976,101172.49249998713,308,50
+bm25,When should I use async def vs normal def for my path operation functions?,procedural,0.0,0.0,3,31.81590000167489,100546.35070002405,100578.16660002572,489,77
+bm25,Can I mix def and async def in my path operation functions?,factual,0.3333333333333333,1.0,3,27.241800038609654,109778.22039998136,109805.46220001997,137,22
+bm25,What does asynchronous code mean?,conceptual,0.0,0.0,3,25.24500002618879,122969.41329998663,122994.65830001282,592,86
+bm25,What is a coroutine?,factual,0.0,0.0,3,21.712500019930303,145611.72039998928,145633.4329000092,1487,206
+bm25,"If I declare a path operation function with normal def instead of async def, how does FastAPI run it?",conceptual,0.0,0.0,3,26.931999949738383,86582.97620003577,86609.90819998551,49,9
+bm25,What is AnyIO and how does FastAPI use it?,factual,0.0,0.0,3,24.179200001526624,114737.85350000253,114762.03270000406,222,32
+bm25,Why is FastAPI a good match for Machine Learning web APIs?,conceptual,0.6666666666666666,1.0,3,22.712700010742992,114781.36790002463,114804.08060003538,304,45
+dense,What is the most popular Python framework that is used to build systems like Instagram?,factual,,,3,2800.543599994853,95492.0795999933,98292.62319998816,6,1
+dense,"Who created Django REST Framework, Starlette, and Uvicorn?",factual,,,3,211.92109998082742,71367.3227999825,71579.24389996333,93,15
+dense,What are the two web user interfaces for API documentation that FastAPI integrates based on the OpenAPI standard?,factual,,,3,205.62319998862222,108615.8737000078,108821.49689999642,21,4
+dense,What status code range should I use for errors caused by the client?,factual,,,3,158.9428000152111,65411.61529999226,65570.55810000747,112,21
+dense,Can I add custom headers to an HTTP error response?,factual,,,3,135.40670002112165,118464.7537000128,118600.16040003393,273,42
+dense,How do I create a custom exception handler for my own exception type?,procedural,,,3,112.96120000770316,129243.29870002111,129356.25990002882,574,65
+dense,What exception does FastAPI raise internally when a request contains invalid data?,factual,,,3,111.61799996625632,71213.90009997413,71325.51809994038,22,1
+dense,What is the difference between FastAPI's HTTPException and Starlette's HTTPException?,conceptual,,,3,122.37370002549142,92822.83710001502,92945.21080004051,376,48
+dense,"When I register an exception handler, should I register it for FastAPI's HTTPException or Starlette's HTTPException?",procedural,,,3,200.9163000038825,87771.4994000271,87972.41570003098,394,51
+dense,Does the RequestValidationError contain the invalid data that the client sent?,factual,,,3,171.60550004336983,127627.01419997029,127798.61970001366,80,11
+dense,What is the main job of a data serialization library like Marshmallow in an API?,conceptual,,,3,2604.578300000867,89457.57329999469,92062.15159999556,657,90
+dense,"Which framework inspired FastAPI to get crazy performance, and why?",conceptual,,,3,187.43089999770746,97615.46400000225,97802.89489999996,403,55
+dense,What is the recommended server to run a FastAPI application?,factual,,,3,196.78769999882206,105079.91190001485,105276.69960001367,7,1
+dense,What basic features does Starlette provide that FastAPI builds on top of?,factual,,,3,203.51770002162084,85859.82409998542,86063.34180000704,285,37
+dense,How do I run the live server for my FastAPI app?,procedural,,,3,182.5228999950923,66053.41659998521,66235.9394999803,50,9
+dense,"After I start the server, what URL should I open in my browser to see the JSON response?",procedural,,,3,194.5203999930527,76640.68080001744,76835.20120001049,54,10
+dense,Where can I find the automatic interactive API documentation provided by Swagger UI?,procedural,,,3,182.28300000191666,75217.31360000558,75399.5966000075,26,1
+dense,What is OpenAPI?,conceptual,,,3,174.33529999107122,37387.69170001615,37562.02700000722,54,10
+dense,Does FastAPI automatically generate a raw JSON schema of my API?,factual,,,3,225.46409998903982,84330.10310001555,84555.56720000459,181,28
+dense,"What are the steps to create a basic FastAPI application, from importing to deploying?",procedural,,,3,170.0598000024911,114360.7592000044,114530.81900000689,714,102
+dense,Can I use a normal function instead of an 'async def' function for my path operation?,factual,,,3,250.68739999551326,115393.02860002499,115643.7160000205,271,43
+dense,How does FastAPI know if a function parameter is a query parameter and not a path parameter?,conceptual,,,3,164.9160000088159,93036.33070000797,93201.24670001678,494,72
+dense,What are query parameters in a URL? Can you give me an example?,factual,,,3,154.73239999846555,124760.39390001097,124915.12630000943,379,55
+dense,"If I declare a query parameter with a default value, is it required or optional?",factual,,,3,183.18160000490025,107965.74859999237,108148.93019999727,8,1
+dense,How do I make a query parameter optional?,procedural,,,3,148.16580002661794,80933.52750001941,81081.69330004603,42,8
+dense,Can FastAPI automatically convert query parameter values from strings to other types like integers or booleans?,factual,,,3,216.2860999815166,104343.39110000292,104559.67719998443,54,10
+dense,What values can I pass in the URL to make a boolean query parameter become True?,procedural,,,3,183.3675000234507,120225.86360000423,120409.23110002768,208,25
+dense,How do I make a query parameter required (not optional)?,procedural,,,3,160.20390001358464,106393.06129998295,106553.26519999653,771,112
+dense,What happens if I don't provide a required query parameter in the URL?,factual,,,3,225.43029999360442,116852.44200000307,117077.87229999667,211,38
+dense,What is a request body? When do I need to send one?,conceptual,,,3,165.2194999915082,114715.99130000686,114881.21079999837,419,68
+dense,"How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",procedural,0.0,0.0,3,1960.3306000353768,147080.26019996032,149040.5907999957,1223,181
+dense,Can I use a try block inside a dependency that uses yield?,factual,0.3333333333333333,0.5,3,168.73169998871163,91709.49209999526,91878.22379998397,529,80
+dense,"If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",factual,0.3333333333333333,0.5,3,134.01650002924725,120074.88269999158,120208.89920002082,395,64
+dense,What happens if I catch an exception in a dependency with yield but don't re-raise it?,conceptual,0.3333333333333333,0.5,3,128.51249997038394,117484.431400022,117612.94389999239,367,51
+dense,What is the recommended way to handle exceptions caught in a dependency with yield?,procedural,0.3333333333333333,1.0,3,118.29600000055507,131074.35680000344,131192.652800004,735,100
+dense,What are the two possible scope values I can use with Depends() for a dependency that uses yield?,factual,0.3333333333333333,1.0,3,102.05440002027899,108607.31260001194,108709.36700003222,21,2
+dense,What is a context manager in Python?,conceptual,0.0,0.0,3,112.95460001565516,84050.72960001417,84163.68420002982,364,56
+dense,Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?,factual,0.3333333333333333,0.5,3,136.05929998448119,79957.34030002495,80093.39960000943,236,28
+dense,What does JWT stand for and what does a JWT token look like?,factual,0.3333333333333333,1.0,3,120.21939997794107,121585.73429996613,121705.95369994408,220,13
+dense,"If I store a JWT token, is the information inside it encrypted?",conceptual,0.3333333333333333,1.0,3,113.94640000071377,14711.86379995197,14825.810199952684,434,69
+dense,What Python package do I need to install to generate and verify JWT tokens?,procedural,0.0,0.0,3,145.0296999537386,108874.30910003604,109019.33879998978,96,14
+dense,What is password hashing and why should I use it?,conceptual,0.3333333333333333,0.5,3,115.9025999950245,118873.51090001175,118989.41350000678,467,69
+dense,"What Python package does FastAPI recommend for password hashing, and what is the recommended algorithm?",factual,0.0,0.0,3,121.17280001984909,118357.575299975,118478.74809999485,472,66
+dense,How do I generate a secure random secret key for signing JWT tokens?,procedural,0.0,0.0,3,120.77189999399707,139047.84219997237,139168.61409996636,1062,170
+dense,Why does the authenticate_user function run verify_password against a dummy hash when the username doesn't exist in the database?,conceptual,0.3333333333333333,0.5,3,112.02120000962168,109059.31089998921,109171.33209999884,63,9
+dense,What is the 'sub' key in a JWT token used for?,factual,0.3333333333333333,1.0,3,111.4289999823086,115660.84299999056,115772.27199997287,401,64
+dense,Does FastAPI force me to use a specific database?,factual,0.3333333333333333,1.0,3,112.99520003376529,79717.64899999835,79830.64420003211,149,26
+dense,What is SQLModel and why would I use it with FastAPI?,factual,0.3333333333333333,1.0,3,110.83140003029257,52480.35029997118,52591.18170000147,443,69
+dense,How do I install SQLModel?,procedural,0.3333333333333333,1.0,3,136.19809999363497,75313.38469998445,75449.58279997809,104,16
+dense,What is the difference between a table model and a data model in SQLModel?,conceptual,0.0,0.0,3,112.53260000376031,55938.28410003334,56050.8167000371,677,97
+dense,Why should I use separate models for creating data and returning data in my API?,conceptual,0.3333333333333333,1.0,3,107.6362999738194,122217.0366999926,122324.67299996642,447,63
+dense,"What is the purpose of a Session in SQLModel, and how should I manage it per request?",procedural,0.3333333333333333,0.5,3,125.00270002055913,84519.65360000031,84644.65630002087,523,77
+dense,"What SQL database does the example use, and why?",factual,0.3333333333333333,1.0,3,103.51069999160245,46559.88979997346,46663.400499965064,259,39
+dense,"How do I update only the fields that a client sends, instead of replacing the entire record?",procedural,0.0,0.0,3,122.80319997807965,105841.67860000161,105964.4817999797,420,58
+dense,What is a middleware in FastAPI?,conceptual,0.3333333333333333,1.0,3,109.5600999542512,56465.27729998343,56574.83739993768,180,27
+dense,How do I create a middleware in FastAPI?,procedural,0.0,0.0,3,98.21830003056675,53756.79690000834,53855.015200038906,675,80
+dense,When do dependencies with yield and background tasks run compared to middleware?,factual,0.3333333333333333,1.0,3,104.85900001367554,64513.323199993465,64618.18220000714,490,71
+dense,How can I add a custom header to measure request processing time?,procedural,0.3333333333333333,0.5,3,102.35269996337593,90900.89180000359,91003.24449996697,1208,162
+dense,"If I add multiple middlewares, what order do they execute in?",conceptual,0.3333333333333333,1.0,3,101.8910999991931,93784.42350000842,93886.31460000761,158,27
+dense,"If I want browser clients to see my custom header, what do I need to configure?",procedural,0.0,0.0,3,122.46280000545084,81689.70380001701,81812.16660002246,1296,175
+dense,When should I use async def vs normal def for my path operation functions?,procedural,0.3333333333333333,1.0,3,2038.142399978824,125631.53780001448,127669.68019999331,688,109
+dense,Can I mix def and async def in my path operation functions?,factual,0.3333333333333333,1.0,3,111.90509999869391,5355.393700010609,5467.298800009303,110,18
+dense,What does asynchronous code mean?,conceptual,0.3333333333333333,0.5,3,138.27669998863712,117100.37299996475,117238.64969995338,449,67
+dense,What is a coroutine?,factual,0.0,0.0,3,97.10449998965487,87214.3333000131,87311.43780000275,483,77
+dense,"If I declare a path operation function with normal def instead of async def, how does FastAPI run it?",conceptual,0.0,0.0,3,102.39479999290779,93772.80460001202,93875.19940000493,259,42
+dense,What is AnyIO and how does FastAPI use it?,factual,0.0,0.0,3,101.87820001738146,43505.54810004542,43607.4263000628,54,10
+dense,Why is FastAPI a good match for Machine Learning web APIs?,conceptual,0.0,0.0,3,95.60030000284314,82173.86649997206,82269.4667999749,1045,154
+hybrid,What is the most popular Python framework that is used to build systems like Instagram?,factual,,,3,4974.783000012394,104425.85669999244,109400.63970000483,6,1
+hybrid,"Who created Django REST Framework, Starlette, and Uvicorn?",factual,,,3,6322.472000028938,105214.09540000604,111536.56740003498,264,42
+hybrid,What are the two web user interfaces for API documentation that FastAPI integrates based on the OpenAPI standard?,factual,,,3,6502.7551999664865,138325.51719999174,144828.27239995822,21,4
+hybrid,What status code range should I use for errors caused by the client?,factual,,,3,6017.896299948916,97925.61889998615,103943.51519993506,32,7
+hybrid,Can I add custom headers to an HTTP error response?,factual,,,3,6632.641699980013,176956.94360003108,183589.5853000111,511,57
+hybrid,How do I create a custom exception handler for my own exception type?,procedural,,,3,6563.427300017793,157295.70670000976,163859.13400002755,575,66
+hybrid,What exception does FastAPI raise internally when a request contains invalid data?,factual,,,3,4595.990300003905,77198.00269999541,81793.99299999932,104,12
+hybrid,What is the difference between FastAPI's HTTPException and Starlette's HTTPException?,conceptual,,,3,4570.99619996734,107636.73959998414,112207.73579995148,372,51
+hybrid,"When I register an exception handler, should I register it for FastAPI's HTTPException or Starlette's HTTPException?",procedural,,,3,6820.370399975218,122713.46270001959,129533.83309999481,400,57
+hybrid,Does the RequestValidationError contain the invalid data that the client sent?,factual,,,3,6346.65830002632,136389.31579998462,142735.97410001094,99,14
+hybrid,What is the main job of a data serialization library like Marshmallow in an API?,conceptual,,,3,5190.0503000069875,110357.83970000921,115547.8900000162,113,15
+hybrid,"Which framework inspired FastAPI to get crazy performance, and why?",conceptual,,,3,4596.120100002736,117739.22519999905,122335.34530000179,372,49
+hybrid,What is the recommended server to run a FastAPI application?,factual,,,3,4547.588999994332,94745.2891000139,99292.87810000824,8,1
+hybrid,What basic features does Starlette provide that FastAPI builds on top of?,factual,,,3,4436.125399981393,84057.1265000035,88493.2518999849,284,37
+hybrid,How do I run the live server for my FastAPI app?,procedural,,,3,4750.590499985265,114720.26349999942,119470.85399998468,236,33
+hybrid,"After I start the server, what URL should I open in my browser to see the JSON response?",procedural,,,3,4413.524200004758,54958.94949999638,59372.47370000114,54,10
+hybrid,Where can I find the automatic interactive API documentation provided by Swagger UI?,procedural,,,3,4649.831100017764,75239.33750001015,79889.16860002792,26,1
+hybrid,What is OpenAPI?,conceptual,,,3,4547.6300999871455,102006.99999998324,106554.63009997038,1466,214
+hybrid,Does FastAPI automatically generate a raw JSON schema of my API?,factual,,,3,4598.209199990379,88999.11910001538,93597.32830000576,367,53
+hybrid,"What are the steps to create a basic FastAPI application, from importing to deploying?",procedural,,,3,4615.761099994415,142616.859199974,147232.6202999684,988,147
+hybrid,Can I use a normal function instead of an 'async def' function for my path operation?,factual,,,3,4761.238499981118,92089.02889999445,96850.26739997556,292,44
+hybrid,How does FastAPI know if a function parameter is a query parameter and not a path parameter?,conceptual,,,3,4542.5669999967795,107161.99730001972,111704.5643000165,405,62
+hybrid,What are query parameters in a URL? Can you give me an example?,factual,,,3,4570.859100000234,117520.7187999913,122091.57789999153,243,33
+hybrid,"If I declare a query parameter with a default value, is it required or optional?",factual,,,3,4903.041999990819,121194.47429999127,126097.51629998209,402,63
+hybrid,How do I make a query parameter optional?,procedural,,,3,4523.10099999886,109888.64309998462,114411.74409998348,72,14
+hybrid,Can FastAPI automatically convert query parameter values from strings to other types like integers or booleans?,factual,,,3,4705.762499972479,84689.57439999213,89395.3368999646,182,26
+hybrid,What values can I pass in the URL to make a boolean query parameter become True?,procedural,,,3,4808.056999987457,113383.75149999047,118191.80849997792,129,22
+hybrid,How do I make a query parameter required (not optional)?,procedural,,,3,4607.965800008969,119795.78319998109,124403.74899999006,359,65
+hybrid,What happens if I don't provide a required query parameter in the URL?,factual,,,3,6395.012599998154,108828.12590000685,115223.138500005,79,14
+hybrid,What is a request body? When do I need to send one?,conceptual,,,3,4501.260700024432,103107.12270002114,107608.38340004557,338,57
+bm25,Can I send a body with a GET request?,factual,,,3,159.65719998348504,166552.09390001255,166711.75109999604,54,10
+bm25,How do I create a data model for a request body in FastAPI?,procedural,,,3,199.8660000099335,90119.79419999989,90319.66020000982,394,64
+bm25,"If I set a model attribute's default value to None, is it required or optional?",factual,,,3,54.75379998097196,171778.10840000166,171832.86219998263,1367,210
+bm25,What happens if the client sends invalid data in the request body?,factual,,,3,57.71609998191707,138207.86519997637,138265.58129995828,590,87
+bm25,Can I declare path parameters and a request body in the same path operation?,factual,,,3,189.49240000802092,106654.39909999259,106843.89150000061,162,26
+bm25,"How does FastAPI know whether a function parameter is a path parameter, a query parameter, or a request body?",conceptual,,,3,50.115999998524785,115811.07839997276,115861.19439997128,411,66
+bm25,Do I have to use Pydantic models for request bodies?,factual,,,3,49.570800008950755,140775.1679000212,140824.73870003014,1135,169
+bm25,What is the difference between using a return type annotation and using the response_model parameter?,conceptual,,,3,126.75039999885485,115160.90259997873,115287.65299997758,456,69
+bm25,"If I declare both a return type and a response_model, which one does FastAPI use?",factual,,,3,53.89759998070076,128611.98360001436,128665.88119999506,386,60
+bm25,I want to create a user but I don't want to send back the plaintext password in the response. How can I do that?,procedural,,,3,58.9353000104893,129837.29009999661,129896.2254000071,516,77
+bm25,How can I omit default values from my response JSON if they weren't actually stored?,procedural,,,3,45.352799992542714,112654.85229998012,112700.20509997266,477,64
+bm25,"If a field has the same value as its default but was explicitly set by the user, will FastAPI include it in the response when I use response_model_exclude_unset=True?",factual,,,3,63.35459998808801,131770.19629999995,131833.55089998804,482,72
+bm25,What is the recommended way to remove some attributes from the output instead of using response_model_include or response_model_exclude?,conceptual,,,3,53.289700008463115,112724.4380999764,112777.72779998486,550,79
+bm25,Can I disable the response model generation completely?,factual,,,3,54.77669998072088,121817.00239999918,121871.7790999799,172,24
+bm25,How do I return a 404 error when an item doesn't exist in my FastAPI application?,procedural,,,3,54.059999994933605,145091.47200000007,145145.531999995,820,109
+dense,Can I send a body with a GET request?,factual,,,3,2900.84129999741,111716.82159998454,114617.66289998195,131,18
+dense,How do I create a data model for a request body in FastAPI?,procedural,,,3,259.31799999671057,91664.40670000156,91923.72469999827,341,55
+dense,"If I set a model attribute's default value to None, is it required or optional?",factual,,,3,219.95009999955073,81278.84610000183,81498.79620000138,361,57
+dense,What happens if the client sends invalid data in the request body?,factual,,,3,199.00009999400936,121035.20129999379,121234.2013999878,389,59
+dense,Can I declare path parameters and a request body in the same path operation?,factual,,,3,210.55430002161302,94341.69750000001,94552.25180002162,211,33
+dense,"How does FastAPI know whether a function parameter is a path parameter, a query parameter, or a request body?",conceptual,,,3,250.3687999851536,112921.17690001032,113171.54569999548,667,100
+dense,Do I have to use Pydantic models for request bodies?,factual,,,3,196.9299000047613,104663.93179999432,104860.86169999908,262,44
+dense,What is the difference between using a return type annotation and using the response_model parameter?,conceptual,,,3,270.4610000073444,128734.61029998725,129005.0712999946,419,61
+dense,"If I declare both a return type and a response_model, which one does FastAPI use?",factual,,,3,181.70300000929274,100665.35180000938,100847.05480001867,494,70
+dense,I want to create a user but I don't want to send back the plaintext password in the response. How can I do that?,procedural,,,3,215.30150002217852,126133.52679999662,126348.8283000188,446,70
+dense,How can I omit default values from my response JSON if they weren't actually stored?,procedural,,,3,180.6438000057824,94152.09119999781,94332.7350000036,1204,143
+dense,"If a field has the same value as its default but was explicitly set by the user, will FastAPI include it in the response when I use response_model_exclude_unset=True?",factual,,,3,204.20449998346157,88523.87489998364,88728.0793999671,472,73
+dense,What is the recommended way to remove some attributes from the output instead of using response_model_include or response_model_exclude?,conceptual,,,3,196.51989999692887,5458.380500000203,5654.900399997132,75,12
+dense,Can I disable the response model generation completely?,factual,,,3,204.44950001547113,75471.65309998672,75676.1026000022,57,8
+dense,How do I return a 404 error when an item doesn't exist in my FastAPI application?,procedural,,,3,184.57320000743493,129226.97540000081,129411.54860000825,927,129
+hybrid,Can I send a body with a GET request?,factual,,,3,5215.926500008209,105614.97549997875,110830.90199998696,54,10
+hybrid,How do I create a data model for a request body in FastAPI?,procedural,,,3,4585.242400004063,102413.06170000462,106998.30410000868,438,67
+hybrid,"If I set a model attribute's default value to None, is it required or optional?",factual,,,3,4606.363799975952,107556.00670000422,112162.37049998017,189,30
+hybrid,What happens if the client sends invalid data in the request body?,factual,,,3,5095.668900001328,109948.19350002217,115043.8624000235,314,46
+hybrid,Can I declare path parameters and a request body in the same path operation?,factual,,,3,4684.339600004023,79778.41349999653,84462.75310000055,249,39
+hybrid,"How does FastAPI know whether a function parameter is a path parameter, a query parameter, or a request body?",conceptual,,,3,5183.017500006827,22921.112699987134,28104.13019999396,306,53
+hybrid,Do I have to use Pydantic models for request bodies?,factual,,,3,4637.173700000858,94994.93200000143,99632.10570000228,146,23
+hybrid,What is the difference between using a return type annotation and using the response_model parameter?,conceptual,,,3,4669.86409999663,137280.0772000046,141949.94130000123,653,97
+hybrid,"If I declare both a return type and a response_model, which one does FastAPI use?",factual,,,3,4981.404099991778,122149.14219998172,127130.5462999735,142,21
+hybrid,I want to create a user but I don't want to send back the plaintext password in the response. How can I do that?,procedural,,,3,4653.60459999647,157993.20460000308,162646.80919999955,1264,178
+hybrid,How can I omit default values from my response JSON if they weren't actually stored?,procedural,,,3,4595.8644000056665,103724.96839999803,108320.8328000037,198,18
+hybrid,"If a field has the same value as its default but was explicitly set by the user, will FastAPI include it in the response when I use response_model_exclude_unset=True?",factual,,,3,4608.055999997305,129384.87940002233,133992.93540001963,441,68
+hybrid,What is the recommended way to remove some attributes from the output instead of using response_model_include or response_model_exclude?,conceptual,,,3,4686.619599990081,83857.58110001916,88544.20070000924,40,5
+hybrid,Can I disable the response model generation completely?,factual,,,3,5014.366300019901,120417.54239998409,125431.90870000399,57,8
+hybrid,How do I return a 404 error when an item doesn't exist in my FastAPI application?,procedural,,,3,5046.52459998033,95166.13080000388,100212.65539998421,486,70
+hybrid,"How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",procedural,0.3333333333333333,1.0,3,2719.458699983079,149140.11669997126,151859.57539995434,1419,209
+hybrid,Can I use a try block inside a dependency that uses yield?,factual,0.6666666666666666,1.0,3,2037.2579999966547,148717.13209996233,150754.39009995898,1245,191
+hybrid,"If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",factual,0.6666666666666666,1.0,3,2126.8603000207804,116699.17350000469,118826.03380002547,282,42
+hybrid,What happens if I catch an exception in a dependency with yield but don't re-raise it?,conceptual,0.6666666666666666,1.0,3,2140.97030000994,123085.86450002622,125226.83480003616,197,34
+hybrid,What is the recommended way to handle exceptions caught in a dependency with yield?,procedural,0.3333333333333333,1.0,3,2466.331099974923,103718.29729998717,106184.6283999621,188,27
+hybrid,What are the two possible scope values I can use with Depends() for a dependency that uses yield?,factual,0.3333333333333333,1.0,3,2050.2691000001505,111450.26770001277,113500.53680001292,21,2
+hybrid,What is a context manager in Python?,conceptual,0.0,0.0,3,2119.713000021875,107548.68250002619,109668.39550004806,1271,184
+hybrid,Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?,factual,0.6666666666666666,1.0,3,2015.848500013817,90477.89529996226,92493.74379997607,812,110
+hybrid,What does JWT stand for and what does a JWT token look like?,factual,0.3333333333333333,1.0,3,2026.09240001766,126466.01440000813,128492.1068000258,220,13
+hybrid,"If I store a JWT token, is the information inside it encrypted?",conceptual,0.3333333333333333,1.0,3,2004.3623999808915,5309.586099989247,7313.948499970138,100,15
+hybrid,What Python package do I need to install to generate and verify JWT tokens?,procedural,0.3333333333333333,1.0,3,2181.04559998028,77333.96749995882,79515.0130999391,5,1
+hybrid,What is password hashing and why should I use it?,conceptual,0.6666666666666666,1.0,3,2102.124700031709,114476.78079997422,116578.90550000593,320,46
+hybrid,"What Python package does FastAPI recommend for password hashing, and what is the recommended algorithm?",factual,0.3333333333333333,1.0,3,2046.5547000057995,146088.81729998393,148135.37199998973,1440,212
+hybrid,How do I generate a secure random secret key for signing JWT tokens?,procedural,0.3333333333333333,1.0,3,2283.266599988565,118086.97140001459,120370.23800000316,170,19
+hybrid,Why does the authenticate_user function run verify_password against a dummy hash when the username doesn't exist in the database?,conceptual,0.3333333333333333,0.5,3,2138.9523000107147,80045.3872999642,82184.33959997492,63,9
+hybrid,What is the 'sub' key in a JWT token used for?,factual,0.3333333333333333,1.0,3,1986.5460000000894,126952.04669999657,128938.59269999666,706,113
+hybrid,Does FastAPI force me to use a specific database?,factual,0.3333333333333333,1.0,3,2034.0159999905154,81523.89900002163,83557.91500001214,121,22
+hybrid,What is SQLModel and why would I use it with FastAPI?,factual,0.3333333333333333,1.0,3,2027.0464000059292,66481.17840004852,68508.22480005445,321,48
+hybrid,How do I install SQLModel?,procedural,0.0,0.0,3,2012.94990000315,94284.43820000393,96297.38810000708,24,4
+hybrid,What is the difference between a table model and a data model in SQLModel?,conceptual,0.0,0.0,3,2213.819099997636,72441.24260003446,74655.06170003209,54,10
+hybrid,Why should I use separate models for creating data and returning data in my API?,conceptual,0.0,0.0,3,2171.236999973189,126227.71010000724,128398.94709998043,525,71
+hybrid,"What is the purpose of a Session in SQLModel, and how should I manage it per request?",procedural,0.6666666666666666,1.0,3,2113.5559999966063,124189.85110003268,126303.40710002929,547,82
+hybrid,"What SQL database does the example use, and why?",factual,0.3333333333333333,1.0,3,2014.5632000057958,77236.75860004732,79251.32180005312,158,24
+hybrid,"How do I update only the fields that a client sends, instead of replacing the entire record?",procedural,0.0,0.0,3,2175.7401999784634,149664.54800002975,151840.28820000822,1194,149
+hybrid,What is a middleware in FastAPI?,conceptual,0.3333333333333333,1.0,3,2014.2954000039026,82521.23710000888,84535.53250001278,165,25
+hybrid,How do I create a middleware in FastAPI?,procedural,0.3333333333333333,1.0,3,2069.5247999974526,101174.02370000491,103243.54850000236,428,62
+hybrid,When do dependencies with yield and background tasks run compared to middleware?,factual,0.3333333333333333,1.0,3,1984.4815999967977,115132.99919996643,117117.48079996323,943,131
+hybrid,How can I add a custom header to measure request processing time?,procedural,0.6666666666666666,1.0,3,2042.6296000368893,116259.36349999392,118301.99310003081,1227,152
+hybrid,"If I add multiple middlewares, what order do they execute in?",conceptual,0.3333333333333333,1.0,3,2032.4480999843217,49305.57450000197,51338.02259998629,253,34
+hybrid,"If I want browser clients to see my custom header, what do I need to configure?",procedural,0.0,0.0,3,2123.449200007599,148463.41239998583,150586.86159999343,1074,145
+hybrid,When should I use async def vs normal def for my path operation functions?,procedural,0.3333333333333333,1.0,3,2009.1387999709696,95258.62220005365,97267.76100002462,383,57
+hybrid,Can I mix def and async def in my path operation functions?,factual,0.3333333333333333,1.0,3,2078.7523000035435,58405.90680000605,60484.659100009594,137,22
+hybrid,What does asynchronous code mean?,conceptual,0.6666666666666666,1.0,3,1995.7765000290237,133279.6371000004,135275.41360002942,528,79
+hybrid,What is a coroutine?,factual,0.0,0.0,3,4632.50639999751,124059.17500000214,128691.68139999965,448,71
+hybrid,"If I declare a path operation function with normal def instead of async def, how does FastAPI run it?",conceptual,0.0,0.0,3,4632.992800034117,91165.51719995914,95798.50999999326,40,7
+hybrid,What is AnyIO and how does FastAPI use it?,factual,0.0,0.0,3,4478.414800018072,103261.0559000168,107739.47070003487,418,59
+hybrid,Why is FastAPI a good match for Machine Learning web APIs?,conceptual,0.3333333333333333,0.5,3,4590.749999973923,118203.03259999491,122793.78259996884,1015,127

@@ -36,6 +36,8 @@ for r in results:
             "retrieval_latency_ms": r["retrieval_latency_ms"],
             "generation_latency_ms": r["generation_latency_ms"],
             "total_latency_ms": r["total_latency_ms"],
+            "answer_length_chars": len(r["answer"]),
+            "answer_length_words": len(r["answer"].split()),
         }
     )
 

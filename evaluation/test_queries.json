@@ -3,56 +3,56 @@
     "query": "How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",
     "ground_truth": "Use yield instead of return. Write the code before yield to set up resources (like creating a database session), then yield the value, then write the cleanup code after yield (like closing the session). Make sure to use yield one single time per dependency.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["dc7f0e23-eeb2-40a0-ac29-7c6baa76bd50"],
     "question_type": "procedural"
   },
   {
     "query": "Can I use a try block inside a dependency that uses yield?",
     "ground_truth": "Yes. If you use a try block in a dependency with yield, you'll receive any exception that was thrown when using the dependency. You can look for a specific exception inside the dependency with except SomeException, and use finally to make sure the exit steps are executed no matter if there was an exception or not.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["dc7f0e23-eeb2-40a0-ac29-7c6baa76bd50", "fa42ba98-a854-4059-897a-9118503a8b76"],
     "question_type": "factual"
   },
   {
     "query": "If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",
     "ground_truth": "Yes. FastAPI will make sure that the exit code in each dependency with yield is run in the correct order. For example, if dependency_c depends on dependency_b, and dependency_b depends on dependency_a, FastAPI will run the exit code in the correct order.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["dc7f0e23-eeb2-40a0-ac29-7c6baa76bd50", "fa42ba98-a854-4059-897a-9118503a8b76"],
     "question_type": "factual"
   },
   {
     "query": "What happens if I catch an exception in a dependency with yield but don't re-raise it?",
     "ground_truth": "If you catch an exception using except in a dependency with yield and you don't raise it again (or raise a new exception), FastAPI won't be able to notice there was an exception. The client will see an HTTP 500 Internal Server Error response, but the server will not have any logs or any other indication of what was the error.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["fa42ba98-a854-4059-897a-9118503a8b76", "99a3ba05-b7ad-446a-8f31-7edd3a4ebe49"],
     "question_type": "conceptual"
   },
   {
     "query": "What is the recommended way to handle exceptions caught in a dependency with yield?",
     "ground_truth": "If you catch an exception in a dependency with yield, unless you are raising another HTTPException or similar, you should re-raise the original exception. You can re-raise the same exception using raise.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["99a3ba05-b7ad-446a-8f31-7edd3a4ebe49"],
     "question_type": "procedural"
   },
   {
     "query": "What are the two possible scope values I can use with Depends() for a dependency that uses yield?",
     "ground_truth": "Depends() receives a scope parameter that can be 'function' or 'request'. 'function' ends the dependency after the path operation function ends but before the response is sent. 'request' ends after the response is sent back to the client. If not specified and the dependency has yield, it will have a scope of 'request' by default.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["4889b99f-8475-44ab-8969-9df3ba8ae803"],
     "question_type": "factual"
   },
   {
     "query": "What is a context manager in Python?",
     "ground_truth": "Context managers are any of those Python objects that you can use in a with statement. For example, you can use with to read a file: 'with open('./somefile.txt') as f:'. When the with block finishes, it makes sure to close the file, even if there were exceptions.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["5149ea46-351b-4d72-8bfc-f002741384fc"],
     "question_type": "conceptual"
   },
   {
     "query": "Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?",
     "ground_truth": "No. FastAPI uses those decorators internally, but you don't have to use the decorators for FastAPI dependencies (and you shouldn't). FastAPI will do it for you internally.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "chunk_ids": ["5149ea46-351b-4d72-8bfc-f002741384fc", "4f1a2afe-04da-4d14-936f-64324ef73df6"],
     "question_type": "factual"
   },
     {
