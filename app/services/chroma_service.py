@@ -85,7 +85,7 @@ class ChromaService:
         self,
         workspace_id: str,
         embedding: list[float],
-        limit: int = 5,
+        limit: int = 3,
     ):
         collection = self.get_collection(workspace_id)
 

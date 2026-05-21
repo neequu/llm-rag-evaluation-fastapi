@@ -35,7 +35,7 @@ class BM25Service:
         bm25: BM25Okapi,
         chunks: list[DocumentChunk],
         query: str,
-        limit: int = 5,
+        limit: int = 3,
     ):
         tokenized_query = BM25Service.tokenize(query)
         scores = bm25.get_scores(tokenized_query)

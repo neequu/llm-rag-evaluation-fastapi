@@ -1,0 +1,261 @@
+[
+{
+    "query": "How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",
+    "ground_truth": "Use yield instead of return. Write the code before yield to set up resources (like creating a database session), then yield the value, then write the cleanup code after yield (like closing the session). Make sure to use yield one single time per dependency.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "Can I use a try block inside a dependency that uses yield?",
+    "ground_truth": "Yes. If you use a try block in a dependency with yield, you'll receive any exception that was thrown when using the dependency. You can look for a specific exception inside the dependency with except SomeException, and use finally to make sure the exit steps are executed no matter if there was an exception or not.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "factual"
+  },
+  {
+    "query": "If I have multiple dependencies that use yield, does FastAPI run their exit code in the correct order?",
+    "ground_truth": "Yes. FastAPI will make sure that the exit code in each dependency with yield is run in the correct order. For example, if dependency_c depends on dependency_b, and dependency_b depends on dependency_a, FastAPI will run the exit code in the correct order.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What happens if I catch an exception in a dependency with yield but don't re-raise it?",
+    "ground_truth": "If you catch an exception using except in a dependency with yield and you don't raise it again (or raise a new exception), FastAPI won't be able to notice there was an exception. The client will see an HTTP 500 Internal Server Error response, but the server will not have any logs or any other indication of what was the error.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What is the recommended way to handle exceptions caught in a dependency with yield?",
+    "ground_truth": "If you catch an exception in a dependency with yield, unless you are raising another HTTPException or similar, you should re-raise the original exception. You can re-raise the same exception using raise.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What are the two possible scope values I can use with Depends() for a dependency that uses yield?",
+    "ground_truth": "Depends() receives a scope parameter that can be 'function' or 'request'. 'function' ends the dependency after the path operation function ends but before the response is sent. 'request' ends after the response is sent back to the client. If not specified and the dependency has yield, it will have a scope of 'request' by default.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What is a context manager in Python?",
+    "ground_truth": "Context managers are any of those Python objects that you can use in a with statement. For example, you can use with to read a file: 'with open('./somefile.txt') as f:'. When the with block finishes, it makes sure to close the file, even if there were exceptions.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?",
+    "ground_truth": "No. FastAPI uses those decorators internally, but you don't have to use the decorators for FastAPI dependencies (and you shouldn't). FastAPI will do it for you internally.",
+    "document_id": "dependencies-with-yield.md",
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
+    "question_type": "factual"
+  },
+    {
+    "query": "What does JWT stand for and what does a JWT token look like?",
+    "ground_truth": "JWT means 'JSON Web Tokens'. It's a standard to codify a JSON object in a long dense string without spaces. It looks like this: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["b92124ca-f088-4f91-952d-4e64ce532984"],
+    "question_type": "factual"
+  },
+  {
+    "query": "If I store a JWT token, is the information inside it encrypted?",
+    "ground_truth": "No. It is not encrypted, so anyone could recover the information from the contents. But it's signed. So when you receive a token that you emitted, you can verify that you actually emitted it.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["b92124ca-f088-4f91-952d-4e64ce532984"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What Python package do I need to install to generate and verify JWT tokens?",
+    "ground_truth": "You need to install PyJWT. Run: pip install pyjwt.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["b92124ca-f088-4f91-952d-4e64ce532984"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What is password hashing and why should I use it?",
+    "ground_truth": "Hashing means converting a password into a sequence of bytes that looks like gibberish. You cannot convert from the gibberish back to the password. If your database is stolen, the thief won't have your users' plaintext passwords, only the hashes. So the thief won't be able to try to use that password in another system.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["b92124ca-f088-4f91-952d-4e64ce532984", "7c5d380f-e60a-4ae5-a556-8c4ade5a1143"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What Python package does FastAPI recommend for password hashing, and what is the recommended algorithm?",
+    "ground_truth": "pwdlib is a great Python package to handle password hashes. The recommended algorithm is 'Argon2'. Install it with: pip install 'pwdlib[argon2]'.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["7c5d380f-e60a-4ae5-a556-8c4ade5a1143"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How do I generate a secure random secret key for signing JWT tokens?",
+    "ground_truth": "Use the command: openssl rand -hex 32. Then copy the output to the variable SECRET_KEY.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["0b8d70d1-e8fa-4b3c-97b6-5fd137d4d65d"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "Why does the authenticate_user function run verify_password against a dummy hash when the username doesn't exist in the database?",
+    "ground_truth": "This ensures the endpoint takes roughly the same amount of time to respond whether the username is valid or not, preventing timing attacks that could be used to enumerate existing usernames.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["7c5d380f-e60a-4ae5-a556-8c4ade5a1143", "0b8d70d1-e8fa-4b3c-97b6-5fd137d4d65d"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What is the 'sub' key in a JWT token used for?",
+    "ground_truth": "The JWT specification says that there's a key sub, with the subject of the token. It's optional to use it, but that's where you would put the user's identification. The sub key should have a unique identifier across the entire application, and it should be a string.",
+    "document_id": "oauth2-jwt.md",
+    "chunk_ids": ["befd3092-dc87-40f3-902e-6ec3353f8ae9"],
+    "question_type": "factual"
+  },
+  {
+    "query": "Does FastAPI force me to use a specific database?",
+    "ground_truth": "No. FastAPI doesn't require you to use a SQL (relational) database. You can use any database that you want.",
+    "document_id": "fastapi_sql_databases.md",
+    "chunk_ids": ["de5b05c3-591b-4893-a972-46ab03c88882"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What is SQLModel and why would I use it with FastAPI?",
+    "ground_truth": "SQLModel is built on top of SQLAlchemy and Pydantic. It was made by the same author of FastAPI to be the perfect match for FastAPI applications that need to use SQL databases.",
+    "document_id": "fastapi_sql_databases.md",
+    "chunk_ids": ["de5b05c3-591b-4893-a972-46ab03c88882"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How do I install SQLModel?",
+    "ground_truth": "First, make sure you create your virtual environment, activate it, and then install sqlmodel with: pip install sqlmodel.",
+    "document_id": "sql-databases.md",
+    "chunk_ids": ["de5b05c3-591b-4893-a972-46ab03c88882"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What is the difference between a table model and a data model in SQLModel?",
+    "ground_truth": "Any model class that has table=True is a table model. It represents a table in the SQL database. Any model class that doesn't have table=True is a data model. These ones are actually just Pydantic models with a couple of small extra features.",
+    "document_id": "sql-databases.md",
+    "chunk_ids": ["6e9808e2-64ca-46e5-a324-cd21bdd86de6"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "Why should I use separate models for creating data and returning data in my API?",
+    "ground_truth": "Using separate models allows you to receive fields like passwords or secret names from the client when creating data, but not return those sensitive fields back to the client in the response. Receive them, but don't return them in the API.",
+    "document_id": "sql-databases.md",
+    "chunk_ids": ["a7d51744-4d9f-45e0-a449-0eeaf2065886"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What is the purpose of a Session in SQLModel, and how should I manage it per request?",
+    "ground_truth": "A Session is what stores the objects in memory and keeps track of any changes needed in the data, then it uses the engine to communicate with the database. You should create a FastAPI dependency with yield that provides a new Session for each request. This ensures that you use a single session per request.",
+    "document_id": "sql-databases.md",
+    "chunk_ids": ["9e3955ce-8c5f-4466-8f14-7c6fadc1a393", "c77e04c3-e569-4104-8789-4060df4c272f"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What SQL database does the example use, and why?",
+    "ground_truth": "In this example, we'll use SQLite, because it uses a single file and Python has integrated support. So you can copy this example and run it as is. Later, for your production application, you might want to use a database server like PostgreSQL.",
+    "document_id": "sql-databases.md",
+    "chunk_ids": ["de5b05c3-591b-4893-a972-46ab03c88882"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How do I update only the fields that a client sends, instead of replacing the entire record?",
+    "ground_truth": "Use an HTTP PATCH operation. In the code, get a dict with all the data sent by the client, excluding any values that would be there just for being the default values. To do it you use exclude_unset=True. Then update the database object with that data.",
+    "document_id": "sql-databases.md",
+    "chunk_ids": ["b5751aab-560b-48fa-90f8-6f1a5fd54c63"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What is a middleware in FastAPI?",
+    "ground_truth": "A middleware is a function that works with every request before it is processed by any specific path operation, and also with every response before returning it. It takes each request, can do something to it, passes it to be processed, then takes the response, can do something to it, and then returns the response.",
+    "document_id": "tutorial-middleware.md",
+    "chunk_ids": ["68b2c19b-5eb8-4aad-8f3e-7914f7168078"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "How do I create a middleware in FastAPI?",
+    "ground_truth": "To create a middleware you use the decorator @app.middleware('http') on top of a function. The middleware function receives the request and a function call_next that will pass the request to the corresponding path operation.",
+    "document_id": "tutorial-middleware.md",
+    "chunk_ids": ["68b2c19b-5eb8-4aad-8f3e-7914f7168078"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "When do dependencies with yield and background tasks run compared to middleware?",
+    "ground_truth": "If you have dependencies with yield, the exit code will run after the middleware. If there were any background tasks, they will run after all the middleware.",
+    "document_id": "tutorial-middleware.md",
+    "chunk_ids": ["68b2c19b-5eb8-4aad-8f3e-7914f7168078"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How can I add a custom header to measure request processing time?",
+    "ground_truth": "You can add a custom header X-Process-Time containing the time in seconds that it took to process the request and generate a response. Record the time before calling call_next, calculate the difference after the response is generated, and add the header before returning the response.",
+    "document_id": "tutorial-middleware.md",
+    "chunk_ids": ["68b2c19b-5eb8-4aad-8f3e-7914f7168078", "b0a85787-a76b-4098-a9f7-d48cf7e9f6a3"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "If I add multiple middlewares, what order do they execute in?",
+    "ground_truth": "When you add multiple middlewares, each new middleware wraps the application forming a stack. The last middleware added is the outermost, and the first is the innermost. On the request path, the outermost middleware runs first. On the response path, it runs last. For example, with MiddlewareA then MiddlewareB: Request path is MiddlewareB then MiddlewareA then route; Response path is route then MiddlewareA then MiddlewareB.",
+    "document_id": "tutorial-middleware.md",
+    "chunk_ids": ["b0a85787-a76b-4098-a9f7-d48cf7e9f6a3"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "If I want browser clients to see my custom header, what do I need to configure?",
+    "ground_truth": "If you have custom headers that you want a client in a browser to be able to see, you need to add them to your CORS configurations using the parameter expose_headers documented in Starlette's CORS docs.",
+    "document_id": "tutorial-middleware.md",
+    "chunk_ids": ["68b2c19b-5eb8-4aad-8f3e-7914f7168078"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "When should I use async def vs normal def for my path operation functions?",
+    "ground_truth": "If you are using third party libraries that tell you to call them with await, then declare your path operation functions with async def. If you are using a third party library that doesn't have support for using await (like most database libraries), then declare your path operation functions with normal def. If your application doesn't have to communicate with anything else and wait for it to respond, use async def. If you just don't know, use normal def.",
+    "document_id": "async.md",
+    "chunk_ids": ["8b272445-b5e5-4508-93a7-b4473e890b83"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "Can I mix def and async def in my path operation functions?",
+    "ground_truth": "Yes, you can mix def and async def in your path operation functions as much as you need and define each one using the best option for you. FastAPI will do the right thing with them.",
+    "document_id": "async.md",
+    "chunk_ids": ["8b272445-b5e5-4508-93a7-b4473e890b83"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What does asynchronous code mean?",
+    "ground_truth": "Asynchronous code means that the language has a way to tell the computer that at some point in the code, it will have to wait for something else to finish somewhere else. During that time, the computer can go and do some other work. That 'wait for something else' normally refers to I/O operations like waiting for data from a client, reading a file, a database operation, or a remote API call.",
+    "document_id": "async.md",
+    "chunk_ids": ["8b272445-b5e5-4508-93a7-b4473e890b83", "0d8093cf-9e4a-413a-9553-ae23e6ad5899"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What is a coroutine?",
+    "ground_truth": "Coroutine is just the fancy term for the thing returned by an async def function. Python knows that it is something like a function that can start and end at some point, but that it might be paused internally whenever there is an await inside of it.",
+    "document_id": "async.md",
+    "chunk_ids": ["8b272445-b5e5-4508-93a7-b4473e890b831"],
+    "question_type": "factual"
+  },
+  {
+    "query": "If I declare a path operation function with normal def instead of async def, how does FastAPI run it?",
+    "ground_truth": "When you declare a path operation function with normal def instead of async def, it is run in an external threadpool that is then awaited, instead of being called directly (as it would block the server).",
+    "document_id": "async.md",
+    "chunk_ids": ["8b272445-b5e5-4508-93a7-b4473e890b831"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What is AnyIO and how does FastAPI use it?",
+    "ground_truth": "Starlette and FastAPI are based on AnyIO, which makes it compatible with both Python's standard library asyncio and Trio. You can directly use AnyIO for your advanced concurrency use cases that require more advanced patterns in your own code.",
+    "document_id": "async.md",
+    "chunk_ids": ["8b272445-b5e5-4508-93a7-b4473e890b830"],
+    "question_type": "factual"
+  },
+  {
+    "query": "Why is FastAPI a good match for Machine Learning web APIs?",
+    "ground_truth": "FastAPI is a good match for Machine Learning web APIs because you can take advantage of concurrency for web development and also exploit the benefits of parallelism and multiprocessing for CPU bound workloads like those in Machine Learning systems. Plus, Python is the main language for Data Science, Machine Learning and especially Deep Learning.",
+    "document_id": "async.md",
+    "chunk_ids": ["ea100cc6-01dd-40f9-b754-b2a83e0c0e76", "38522f32-04eb-4d1f-9b5d-ff893f07fa05"],
+    "question_type": "conceptual"
+  }
+]
