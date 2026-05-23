@@ -1,7 +1,5 @@
 from uuid import UUID
 
-import tiktoken
-
 from app.core.s3 import s3_client
 from app.crud.documents import DocumentService
 from app.db.db import AsyncSessionLocal

@@ -1,6 +1,7 @@
 from arq import create_pool
 from arq.connections import RedisSettings
-from core.config import settings
+
+from app.core.config import settings
 
 redis = None
 
