@@ -1,5 +1,320 @@
 [
-{
+  {
+    "query": "What is the most popular Python framework that is used to build systems like Instagram?",
+    "ground_truth": "Django. It's the most popular Python framework and is widely trusted. It is used to build systems like Instagram.",
+    "document_id": "alternatives.md",
+    "chunk_ids": ["04d89381-8f50-4ee0-a803-c87de2ed8966"],
+    "question_type": "factual"
+  },
+  {
+    "query": "Who created Django REST Framework, Starlette, and Uvicorn?",
+    "ground_truth": "Tom Christie. Django REST Framework was created by Tom Christie. The same creator of Starlette and Uvicorn, on which FastAPI is based.",
+    "document_id": "alternatives.md",
+    "chunk_ids": ["04d89381-8f50-4ee0-a803-c87de2ed8966"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What are the two web user interfaces for API documentation that FastAPI integrates based on the OpenAPI standard?",
+    "ground_truth": "Swagger UI and ReDoc. These two were chosen for being fairly popular and stable.",
+    "document_id": "alternatives.md",
+    "chunk_ids": ["8de288a4-5a8f-4e79-8263-354afb0422ac"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What is the main job of a data serialization library like Marshmallow in an API?",
+    "ground_truth": "Data 'serialization' is taking data from the code (Python) and converting it into something that can be sent through the network. For example, converting an object containing data from a database into a JSON object.",
+    "document_id": "alternatives.md",
+    "chunk_ids": ["8de288a4-5a8f-4e79-8263-354afb0422ac"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "Which framework inspired FastAPI to get crazy performance, and why?",
+    "ground_truth": "Sanic. It was one of the first extremely fast Python frameworks based on asyncio. It clearly inspired Uvicorn and Starlette, that are currently faster than Sanic in open benchmarks. That's why FastAPI is based on Starlette, as it is the fastest framework available.",
+    "document_id": "alternatives.md",
+    "chunk_ids": ["f449d50e-982a-420a-8443-99659a28fec3"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What is the recommended server to run a FastAPI application?",
+    "ground_truth": "Uvicorn. It is the recommended server for Starlette and FastAPI. The main web server to run FastAPI applications.",
+    "document_id": "alternatives.md",
+    "chunk_ids": ["5c988f88-cf3d-42ed-8e78-abb6490aa901"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What basic features does Starlette provide that FastAPI builds on top of?",
+    "ground_truth": "Starlette provides all the basic web microframework functionality. It has: Seriously impressive performance, WebSocket support, In-process background tasks, Startup and shutdown events, Test client built on HTTPX, CORS, GZip, Static Files, Streaming responses, Session and Cookie support, 100% test coverage, 100% type annotated codebase, and Few hard dependencies.",
+    "document_id": "alternatives.md",
+    "chunk_ids": ["ceee7db2-cd86-4091-bd4a-2dea45688e4e","5c988f88-cf3d-42ed-8e78-abb6490aa901"],
+    "question_type": "factual"
+  },
+   {
+    "query": "How do I run the live server for my FastAPI app?",
+    "ground_truth": "Run the command 'fastapi dev'.",
+    "document_id": "first-steps.md",
+    "chunk_ids": ["109ab7c2-65b1-4e1e-a2fb-e6db4cbb5d5c "],
+    "question_type": "procedural"
+  },
+  {
+    "query": "After I start the server, what URL should I open in my browser to see the JSON response?",
+    "ground_truth": "Open your browser at http://127.0.0.1:8000.",
+    "document_id": "first-steps.md",
+    "chunk_ids": ["109ab7c2-65b1-4e1e-a2fb-e6db4cbb5d5c "],
+    "question_type": "procedural"
+  },
+  {
+    "query": "Where can I find the automatic interactive API documentation provided by Swagger UI?",
+    "ground_truth": "Go to http://127.0.0.1:8000/docs.",
+    "document_id": "first-steps.md",
+    "chunk_ids": ["109ab7c2-65b1-4e1e-a2fb-e6db4cbb5d5c "],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What is OpenAPI?",
+    "ground_truth": "OpenAPI is a specification that dictates how to define a schema of your API. FastAPI generates a schema with all your API using the OpenAPI standard.",
+    "document_id": "first-steps.md",
+    "chunk_ids": ["109ab7c2-65b1-4e1e-a2fb-e6db4cbb5d5c ", "9114e693-fa02-42d7-b2eb-065c0b64a58b"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "Does FastAPI automatically generate a raw JSON schema of my API?",
+    "ground_truth": "Yes. FastAPI automatically generates a JSON (schema) with the descriptions of all your API. You can see it directly at http://127.0.0.1:8000/openapi.json.",
+    "document_id": "first-steps.md",
+    "chunk_ids": ["9114e693-fa02-42d7-b2eb-065c0b64a58b"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What are the steps to create a basic FastAPI application, from importing to deploying?",
+    "ground_truth": "Step 1: Import FastAPI. Step 2: Create a FastAPI instance. Step 3: Create a path operation decorator (like @app.get('/')). Step 4: Define the path operation function (like def root():). Step 5: Return the content. Step 6: Deploy it.",
+    "document_id": "first-steps.md",
+    "chunk_ids": ["16fb5a24-b504-4918-96ba-66d167f7c765", "fe4e7c43-5857-49ef-826d-b1459e6fd159", "633d7128-2154-400c-8d59-80a7814e270e", "b29f46bf-15a1-4bbe-be50-2e4593f32851"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "Can I use a normal function instead of an 'async def' function for my path operation?",
+    "ground_truth": "Yes. You can define it as a normal function instead of async def.",
+    "document_id": "first-steps.md",
+    "chunk_ids": ["633d7128-2154-400c-8d59-80a7814e270e"],
+    "question_type": "factual"
+  },
+    {
+    "query": "How does FastAPI know if a function parameter is a query parameter and not a path parameter?",
+    "ground_truth": "When you declare other function parameters that are not part of the path parameters, they are automatically interpreted as query parameters. FastAPI is smart enough to notice that the path parameter is a path parameter and the other is not, so it becomes a query parameter.",
+    "document_id": "query-params.md",
+    "chunk_ids": ["b172a773-8740-4ce2-adb8-89be3b6c0b91"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "What are query parameters in a URL? Can you give me an example?",
+    "ground_truth": "The query is the set of key-value pairs that go after the ? in a URL, separated by & characters. For example, in the URL http://127.0.0.1:8000/items/?skip=0&limit=10, the query parameters are skip with a value of 0 and limit with a value of 10.",
+    "document_id": "query-params.md",
+    "chunk_ids": ["b172a773-8740-4ce2-adb8-89be3b6c0b91"],
+    "question_type": "factual"
+  },
+  {
+    "query": "If I declare a query parameter with a default value, is it required or optional?",
+    "ground_truth": "When you declare a default value for a query parameter, then it is not required (it becomes optional).",
+    "document_id": "query-params.md",
+    "chunk_ids": ["b172a773-8740-4ce2-adb8-89be3b6c0b91", "eee4245b-f0e2-4405-8fea-3a87554f660c"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How do I make a query parameter optional?",
+    "ground_truth": "You can declare optional query parameters by setting their default to None.",
+    "document_id": "query-params.md",
+    "chunk_ids": ["b172a773-8740-4ce2-adb8-89be3b6c0b91"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "Can FastAPI automatically convert query parameter values from strings to other types like integers or booleans?",
+    "ground_truth": "Yes. As query parameters are part of the URL, they are naturally strings. But when you declare them with Python types (like int or bool), they are converted to that type and validated against it.",
+    "document_id": "query-params.md",
+    "chunk_ids": ["b172a773-8740-4ce2-adb8-89be3b6c0b91"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What values can I pass in the URL to make a boolean query parameter become True?",
+    "ground_truth": "If you go to a URL with short=1, short=True, short=true, short=on, short=yes, or any other case variation (uppercase, first letter in uppercase, etc), your function will see the parameter with a bool value of True.",
+    "document_id": "query-params.md",
+    "chunk_ids": ["b172a773-8740-4ce2-adb8-89be3b6c0b91", "eee4245b-f0e2-4405-8fea-3a87554f660c"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "How do I make a query parameter required (not optional)?",
+    "ground_truth": "When you want to make a query parameter required, you can just not declare any default value.",
+    "document_id": "query-params.md",
+    "chunk_ids": ["eee4245b-f0e2-4405-8fea-3a87554f660c"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What happens if I don't provide a required query parameter in the URL?",
+    "ground_truth": "If you don't add the required parameter, you will see an error with a detail message saying 'Field required' and listing the missing query parameter.",
+    "document_id": "query-params.md",
+    "chunk_ids": ["eee4245b-f0e2-4405-8fea-3a87554f660c"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What is a request body? When do I need to send one?",
+    "ground_truth": "A request body is data sent by the client to your API. To send data, you should use one of: POST (the more common), PUT, DELETE or PATCH.",
+    "document_id": "body.md",
+    "chunk_ids": ["1943c864-9dea-4805-9ce2-219644724374"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "Can I send a body with a GET request?",
+    "ground_truth": "Sending a body with a GET request has an undefined behavior in the specifications, nevertheless, it is supported by FastAPI, only for very complex/extreme use cases. As it is discouraged, the interactive docs with Swagger UI won't show the documentation for the body when using GET, and proxies in the middle might not support it.",
+    "document_id": "body.md",
+    "chunk_ids": ["1943c864-9dea-4805-9ce2-219644724374"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How do I create a data model for a request body in FastAPI?",
+    "ground_truth": "First, you need to import BaseModel from pydantic. Then you declare your data model as a class that inherits from BaseModel. Use standard Python types for all the attributes.",
+    "document_id": "body.md",
+    "chunk_ids": ["1943c864-9dea-4805-9ce2-219644724374"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "If I set a model attribute's default value to None, is it required or optional?",
+    "ground_truth": "When a model attribute has a default value, it is not required. Use None to make it just optional.",
+    "document_id": "body.md",
+    "chunk_ids": ["1943c864-9dea-4805-9ce2-219644724374"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What happens if the client sends invalid data in the request body?",
+    "ground_truth": "If the data is invalid, FastAPI will return a nice and clear error, indicating exactly where and what was the incorrect data.",
+    "document_id": "body.md",
+    "chunk_ids": ["f087bb06-2205-48c9-9578-423ffce666e3"],
+    "question_type": "factual"
+  },
+  {
+    "query": "Can I declare path parameters and a request body in the same path operation?",
+    "ground_truth": "Yes, you can declare path parameters and request body at the same time. FastAPI will recognize that the function parameters that match path parameters should be taken from the path, and that function parameters that are declared to be Pydantic models should be taken from the request body.",
+    "document_id": "body.md",
+    "chunk_ids": ["f087bb06-2205-48c9-9578-423ffce666e3", "fc88f0bd-d58c-4113-b7a8-f6e7c6855769"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How does FastAPI know whether a function parameter is a path parameter, a query parameter, or a request body?",
+    "ground_truth": "FastAPI recognizes them as follows: If the parameter is also declared in the path, it will be used as a path parameter. If the parameter is of a singular type (like int, float, str, bool, etc) it will be interpreted as a query parameter. If the parameter is declared to be of the type of a Pydantic model, it will be interpreted as a request body.",
+    "document_id": "body.md",
+    "chunk_ids": ["fc88f0bd-d58c-4113-b7a8-f6e7c6855769"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "Do I have to use Pydantic models for request bodies?",
+    "ground_truth": "No. If you don't want to use Pydantic models, you can also use Body parameters.",
+    "document_id": "body.md",
+    "chunk_ids": ["fc88f0bd-d58c-4113-b7a8-f6e7c6855769"],
+    "question_type": "factual"
+  },
+    {
+    "query": "What is the difference between using a return type annotation and using the response_model parameter?",
+    "ground_truth": "If you add a return type annotation, tools and editors will complain if you return a different type than declared. In cases where you want to return a dictionary or database object but declare it as a Pydantic model, you can use the response_model parameter in the path operation decorator instead of the return type. FastAPI will use response_model to do all the data documentation, validation, and filtering.",
+    "document_id": "response-model.md",
+    "chunk_ids": ["be51d1c2-82ad-41ed-9bb8-2f4590a207f1", "144f32b6-0488-421d-9503-9705c14371a9"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "If I declare both a return type and a response_model, which one does FastAPI use?",
+    "ground_truth": "The response_model will take priority and be used by FastAPI.",
+    "document_id": "response-model.md",
+    "chunk_ids": ["144f32b6-0488-421d-9503-9705c14371a9"],
+    "question_type": "factual"
+  },
+  {
+    "query": "I want to create a user but I don't want to send back the plaintext password in the response. How can I do that?",
+    "ground_truth": "You can create an input model with the plaintext password and an output model without it. Then declare the response_model to be your output model that doesn't include the password. FastAPI will take care of filtering out all the data that is not declared in the output model.",
+    "document_id": "response-model.md",
+    "chunk_ids": ["144f32b6-0488-421d-9503-9705c14371a9", "f22779d1-58ac-446b-8b2a-ad57cc0e3488"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "How can I omit default values from my response JSON if they weren't actually stored?",
+    "ground_truth": "You can set the path operation decorator parameter response_model_exclude_unset=True. Then default values won't be included in the response, only the values actually set.",
+    "document_id": "response-model.md",
+    "chunk_ids": ["8365b8cb-24a8-49c1-adeb-9d329e1dc8cf"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "If a field has the same value as its default but was explicitly set by the user, will FastAPI include it in the response when I use response_model_exclude_unset=True?",
+    "ground_truth": "Yes. FastAPI (actually Pydantic) is smart enough to realize that even though the fields have the same values as the defaults, they were set explicitly instead of taken from the defaults. So they will be included in the JSON response.",
+    "document_id": "response-model.md",
+    "chunk_ids": ["8365b8cb-24a8-49c1-adeb-9d329e1dc8cf", "e49a13de-86e6-48c7-bdf4-2517207a8782"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What is the recommended way to remove some attributes from the output instead of using response_model_include or response_model_exclude?",
+    "ground_truth": "It is still recommended to use the ideas of using multiple classes instead of these parameters. This is because the JSON Schema generated in your app's OpenAPI (and the docs) will still be the one for the complete model, even if you use response_model_include or response_model_exclude to omit some attributes.",
+    "document_id": "response-model.md",
+    "chunk_ids": ["e49a13de-86e6-48c7-bdf4-2517207a8782"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "Can I disable the response model generation completely?",
+    "ground_truth": "Yes. You can disable the response model generation by setting response_model=None. This will make FastAPI skip the response model generation and you can have any return type annotations you need without it affecting your FastAPI application.",
+    "document_id": "response-model.md",
+    "chunk_ids": ["5b276007-c05d-40a4-8cec-29cb33e43684", "8365b8cb-24a8-49c1-adeb-9d329e1dc8cf"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How do I return a 404 error when an item doesn't exist in my FastAPI application?",
+    "ground_truth": "Use HTTPException. Import HTTPException, then raise it with a status code of 404. For example: raise HTTPException(status_code=404, detail='Item not found'). Because it's a Python exception, you don't return it, you raise it.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["6f6c4d2b-e2bc-41cc-846e-749cf54bba2e"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What status code range should I use for errors caused by the client?",
+    "ground_truth": "You would normally return an HTTP status code in the range of 400 (from 400 to 499). The status codes in the 400 range mean that there was an error from the client.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["6f6c4d2b-e2bc-41cc-846e-749cf54bba2e"],
+    "question_type": "factual"
+  },
+  {
+    "query": "Can I add custom headers to an HTTP error response?",
+    "ground_truth": "Yes. In case you needed it for an advanced scenario, you can add custom headers to the HTTP error.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["01e78678-62d9-4a1f-977f-24faa0ae20a4"],
+    "question_type": "factual"
+  },
+  {
+    "query": "How do I create a custom exception handler for my own exception type?",
+    "ground_truth": "You can add a custom exception handler with @app.exception_handler(). For example, if you have a custom exception UnicornException, you add @app.exception_handler(UnicornException) to decorate your exception handler function.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["01e78678-62d9-4a1f-977f-24faa0ae20a4"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "What exception does FastAPI raise internally when a request contains invalid data?",
+    "ground_truth": "When a request contains invalid data, FastAPI internally raises a RequestValidationError.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["01e78678-62d9-4a1f-977f-24faa0ae20a4", "0f847318-249e-4eca-90ff-60ca50689022"],
+    "question_type": "factual"
+  },
+  {
+    "query": "What is the difference between FastAPI's HTTPException and Starlette's HTTPException?",
+    "ground_truth": "The only difference is that FastAPI's HTTPException accepts any JSON-able data for the detail field, while Starlette's HTTPException only accepts strings for it. FastAPI's HTTPException error class inherits from Starlette's HTTPException error class.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["c5468e3c-8f5b-48c8-9d32-b9a03af6bee2"],
+    "question_type": "conceptual"
+  },
+  {
+    "query": "When I register an exception handler, should I register it for FastAPI's HTTPException or Starlette's HTTPException?",
+    "ground_truth": "You should register it for Starlette's HTTPException. This way, if any part of Starlette's internal code, or a Starlette extension or plug-in, raises a Starlette HTTPException, your handler will be able to catch and handle it.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["c5468e3c-8f5b-48c8-9d32-b9a03af6bee2"],
+    "question_type": "procedural"
+  },
+  {
+    "query": "Does the RequestValidationError contain the invalid data that the client sent?",
+    "ground_truth": "Yes. The RequestValidationError contains the body it received with invalid data. You could use it while developing your app to log the body and debug it, or return it to the user.",
+    "document_id": "handling-errors.md",
+    "chunk_ids": ["0f847318-249e-4eca-90ff-60ca50689022", "c5468e3c-8f5b-48c8-9d32-b9a03af6bee2"],
+    "question_type": "factual"
+  },
+   {
     "query": "How do I create a dependency that needs to do some cleanup after the request is finished, like closing a database session?",
     "ground_truth": "Use yield instead of return. Write the code before yield to set up resources (like creating a database session), then yield the value, then write the cleanup code after yield (like closing the session). Make sure to use yield one single time per dependency.",
     "document_id": "dependencies-with-yield.md",
@@ -52,7 +367,7 @@
     "query": "Do I need to decorate my dependency function with @contextlib.contextmanager when using yield in FastAPI?",
     "ground_truth": "No. FastAPI uses those decorators internally, but you don't have to use the decorators for FastAPI dependencies (and you shouldn't). FastAPI will do it for you internally.",
     "document_id": "dependencies-with-yield.md",
-    "chunk_ids": ["5149ea46-351b-4d72-8bfc-f002741384fc", "4f1a2afe-04da-4d14-936f-64324ef73df6"],
+    "chunk_ids": ["23bb0c5e-e13a-4c16-9599-fadb1a3577c5", "23bb0c5e-e13a-4c16-9599-fadb1a3577c5"],
     "question_type": "factual"
   },
     {
