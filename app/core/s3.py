@@ -51,20 +51,13 @@ class S3Client:
     ) -> str:
         """Upload a file-like object and return the object key.
 
-        We auto-generate a UUID key if none is provided. This avoids filename
-        collisions and prevents users from overwriting each other's files by
-        guessing a predictable path.
-
-        Args:
-            file_obj: Any file-like object with a .read() method.
-            object_key: S3 key (path). Auto-generated if omitted.
-            content_type: MIME type stored as S3 metadata.
-            bucket: Override the default bucket.
-            extra_metadata: Arbitrary string key-value pairs stored as S3
-                user-defined metadata (accessible without downloading the file).
-
-        Returns:
-            The object key (not a full URL — use get_presigned_url for that).
+        s        Args:
+                    file_obj: Any file-like object with a .read() method.
+                    object_key: S3 key (path). Auto-generated if omitted.
+                    content_type: MIME type stored as S3 metadata.
+                    bucket: Override the default bucket.
+                    extra_metadata: Arbitrary string key-value pairs stored as S3
+                        user-defined metadata (accessible without downloading the file).
         """
         bucket = bucket or settings.MINIO_BUCKET_NAME
         key = object_key or str(uuid4())
@@ -89,11 +82,6 @@ class S3Client:
         bucket: str | None = None,
     ) -> str:
         """Generate a time-limited presigned GET URL.
-
-        Why presigned URLs instead of streaming through FastAPI?
-        - The client downloads directly from MinIO — zero load on your app server.
-        - No need to hold a DB/app connection open for the duration of the download.
-        - Works for arbitrarily large files without buffering in memory.
 
         Args:
             object_key: The S3 key returned by upload_file.
@@ -121,11 +109,6 @@ class S3Client:
     ) -> tuple[str, str]:
         """Generate a presigned PUT URL for direct client-to-S3 uploads.
 
-        This is the pattern for large file uploads: the client uploads directly
-        to MinIO, bypassing your API server entirely. Your server only issues
-        the presigned URL and later receives a webhook/callback to record the
-        upload in your DB.
-
         Returns:
             A tuple of (object_key, presigned_put_url).
         """
@@ -149,7 +132,7 @@ class S3Client:
         bucket: str | None = None,
     ) -> None:
         """Delete an object from S3. Idempotent — deleting a non-existent key
-        does not raise an error (S3 semantics)."""
+        does not raise an error"""
         bucket = bucket or settings.MINIO_BUCKET_NAME
         async with self._client() as client:
             await client.delete_object(Bucket=bucket, Key=object_key)
